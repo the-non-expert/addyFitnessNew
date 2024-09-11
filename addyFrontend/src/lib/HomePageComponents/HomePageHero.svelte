@@ -1,6 +1,8 @@
 <script></script>
 
-<div class="mt-4 flex flex-col items-center bg-[#F7F6FB] md:py-16 py-12">
+<div
+  class="mt-4 flex flex-col items-center bg-gradient-to-b from-[#E790FF] to-white md:py-16 py-12"
+>
   <p class="md:text-8xl text-4xl baskervville-sc-regular">
     Fuel Your <span class="text-[#5e17eb]"> Body Right</span>
   </p>
