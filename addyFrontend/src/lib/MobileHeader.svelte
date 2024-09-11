@@ -8,7 +8,7 @@
     { id: 2, name: "Nutrition", redirectUrl: "/nutrition" },
     { id: 3, name: "Healthcare", redirectUrl: "/healthcare" },
     { id: 4, name: "Management", redirectUrl: "/management" },
-    { id: 5, name: "Portfolio", redirectUrl: "/" },
+    { id: 5, name: "About", redirectUrl: "/about" },
   ];
 
   let isMenuOpen = false;
@@ -45,7 +45,7 @@
     >
       {#each navOptions as link}
         <a
-          href={link.href}
+          href={link.redirectUrl}
           class="text-2xl py-2"
           on:click={() => {
             isMenuOpen = !isMenuOpen;

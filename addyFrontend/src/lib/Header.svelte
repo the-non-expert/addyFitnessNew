@@ -8,11 +8,12 @@
     { id: 2, name: "Nutrition", redirectUrl: "/nutrition" },
     { id: 3, name: "Healthcare", redirectUrl: "/healthcare" },
     { id: 4, name: "Management", redirectUrl: "/management" },
-    { id: 5, name: "Portfolio", redirectUrl: "/" },
+    { id: 5, name: "About", redirectUrl: "/about" },
+    { id: 6, name: "Contact", redirectUrl: "/contact" },
   ];
 </script>
 
-<div class="hidden md:flex items-center justify-evenly mt-8">
+<div class="hidden md:flex items-center justify-evenly mt-5">
   <a href="/"><img src={gsToHttp(image)} alt="" class="w-56" /></a>
 
   <header class="flex gap-8 justify-center items-center headerOptions">
