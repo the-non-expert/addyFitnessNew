@@ -1,5 +1,6 @@
 <script>
   import IndividualCard from "../../lib/TrainingPageComponents/IndividualCard.svelte";
+  import TrainingHero from "../../lib/TrainingPageComponents/TrainingHero.svelte";
 
   let trainingCardData = [
     {
@@ -54,6 +55,7 @@
   ];
 </script>
 
+<TrainingHero />
 <div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-4">
   {#each trainingCardData as individualData (individualData.id)}
     <IndividualCard individualCardData={individualData} />

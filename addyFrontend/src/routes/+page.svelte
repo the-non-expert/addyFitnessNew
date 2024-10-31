@@ -1,4 +1,5 @@
 <script>
+  import BmrBmiCalculator from "../lib/HomePageComponents/BmrBmiCalculator.svelte";
   import HomePageHero from "../lib/HomePageComponents/HomePageHero.svelte";
   import HowWeHelpYou from "../lib/HomePageComponents/HowWeHelpYou.svelte";
   import JoinCommunity from "../lib/HomePageComponents/JoinCommunity.svelte";
@@ -7,5 +8,6 @@
 <div>
   <HomePageHero />
   <HowWeHelpYou />
+  <BmrBmiCalculator />
   <JoinCommunity />
 </div>
