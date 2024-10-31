@@ -1,31 +1,79 @@
-<script></script>
+<script>
+  import { fly } from "svelte/transition";
+  import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  let homeHeroImage = "gs://addyfitness-db121.appspot.com/homeheroImage.png";
+</script>
 
-<div
-  class="mt-4 flex flex-col items-center bg-gradient-to-b from-[#E790FF] to-white md:py-16 py-12"
->
-  <p class="md:text-8xl text-4xl baskervville-sc-regular">
-    Fuel Your <span class="text-[#5e17eb]"> Body Right</span>
-  </p>
-  <p class="mt-5 md:text-2xl md:w-8/12 w-11/12 text-center raleway-font">
-    We are dedicated to helping you achieve your ideal body through tailored
-    nutrition plans and expert guidance. Ensuring you can live your life to the
-    fullest with optimal health and vitality.
-  </p>
+<div class="relative w-full">
+  <!-- Top half background -->
+  <div class="absolute top-0 left-0 w-full h-[65%] bg-slate-900" />
+  <!-- Bottom half background -->
+  <div class="absolute bottom-0 left-0 w-full h-[35%] bg-white" />
 
-  <div class="flex w-10/12 md:w-auto gap-6 md:gap-12 text-2xl mt-10 stats">
-    <p class="text-center">
-      <span class="text-3xl font-bold">100+</span><br /> Members Joined
-    </p>
-    <p class="text-center">
-      <span class="text-3xl font-bold">30+</span><br /> Fitness Programs
-    </p>
-  </div>
-
-  <a href="/training"
-    ><button class="mt-10 bg-black text-white px-7 py-3 rounded-xl"
-      >Start your Health Journey Now!</button
-    ></a
+  <!-- Content -->
+  <section
+    class="relative w-full min-h-[600px] flex items-center justify-center px-4 py-16"
   >
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="space-y-6">
+        <!-- Small text at top -->
+        <p class="text-gray-400 text-sm">
+          Take your health to the next level 🚀
+        </p>
+
+        <!-- Main heading -->
+        <h1 class="raleway-font text-4xl md:text-5xl font-bold text-white">
+          Your Personalized<br />
+          Path to Wellness
+        </h1>
+
+        <!-- Description -->
+        <p class="text-white max-w-2xl mx-auto text-xl baskervville-sc-regular">
+          At Addy Fitness, we believe that fitness is more than just a routine –
+          it's a lifestyle. Our team of expert trainers is here to create
+          personalized fitness and nutrition plans that fit your unique needs
+        </p>
+
+        <!-- Metrics -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <div
+            class="bg-purple-600 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
+            transition:fly={{ y: 20, duration: 600 }}
+          >
+            <span>100+ Members joined</span>
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13.5 2L4 14H12L10.5 22L20 10H12L13.5 2Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+
+          <div
+            class="bg-white text-slate-900 px-6 py-3 rounded-full flex items-center justify-center gap-2"
+            transition:fly={{ y: 20, duration: 800 }}
+          >
+            <span>30+ Fitness Programs</span>
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13.5 2L4 14H12L10.5 22L20 10H12L13.5 2Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Illustration -->
+        <div class="items-center justify-center">
+          <img
+            src={gsToHttp(homeHeroImage)}
+            alt="Person exercising with dumbbells"
+            class="object-cover mt-20 rounded-xl mx-auto max-w-lg w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <style>

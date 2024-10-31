@@ -1,76 +1,118 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
 
-  let tailoredPlans = "gs://addyfitness-db121.appspot.com/tailoredPlans.jpg";
-  let sustainableHabits =
-    "gs://addyfitness-db121.appspot.com/SustainableHabits.jpg";
-  let monitoring = "gs://addyfitness-db121.appspot.com/Monitoring.jpg";
+  const images = {
+    nutrition: "gs://addyfitness-db121.appspot.com/nutritionFuel.png",
+    mascot: "gs://addyfitness-db121.appspot.com/experttraining.png",
+    running: "gs://addyfitness-db121.appspot.com/flexibleTraining.png",
+    doctor: "gs://addyfitness-db121.appspot.com/support.png",
+  };
+
+  const cards = [
+    {
+      title: "Nutrition to Fuel Your Journey",
+      description:
+        "No two bodies are the same, and neither are our nutrition plans. Ready to transform your health journey?",
+      image: images.nutrition,
+      bgColor: "bg-orange-300",
+      link: null,
+    },
+    {
+      title: "Expert Training and Nutrition Plans",
+      description:
+        "When it comes to fitness and nutrition, having the right support can make all the difference. Our coaches ensuring you stay motivated and on track to meet your goals",
+      image: images.mascot,
+      bgColor: "bg-purple-400",
+      link: "/learn-more",
+    },
+    {
+      title: "Flexible Training for Every Schedule",
+      description:
+        "Life is busy, and we get that. That's why Addy Fitness offers flexible plans that fit into your schedule, no matter how hectic it gets.",
+      image: images.running,
+      bgColor: "bg-green-100",
+      link: "/learn-more",
+    },
+    {
+      title: "Comprehensive Support",
+      description:
+        "Collaborating with hospitals and clinics across India to provide in-person medical support and consultations.",
+      image: images.doctor,
+      bgColor: "bg-gray-100",
+      link: null,
+    },
+  ];
+
+  // Helper function to determine if card is wide layout
+  const isWideCard = (index) => index === 1 || index === 2;
 </script>
 
-<div class="mt-6 mb-10">
-  <p class="josefin-slab-regular text-4xl text-center font-bold raleway-font">
-    How Addy Fitness Helps you
-  </p>
-
-  <div
-    class="flex md:flex-row flex-col-reverse gap-10 mt-10 bg-[#F4F6F8] px-12 p-4 rounded-xl md:w-10/12 mx-auto"
-  >
-    <img src={gsToHttp(tailoredPlans)} alt="" class="md:h-96 rounded" />
-
-    <p class="text-2xl font-semibold md:mt-20 text-center md:text-left">
-      Tailored Plans <br />
-      <span class="font-normal text-base leading-normal mt-3"
-        >At Addy Fitness, we take the time to understand your goals and
-        lifestyle before crafting a plan that suits YOU! Just like your friend's
-        clothes might not be the right fit for you, their nutrition and training
-        plans won't be either. Our personalized plans are designed to meet your
-        unique needs.</span
-      >
-    </p>
-  </div>
-
-  <div
-    class="flex md:flex-row flex-col gap-10 mt-5 md:px-10 md:w-10/12 mx-auto"
-  >
-    <div
-      class="bg-[#F4F6F8] flex md:flex-col flex-col-reverse gap-10 items-center p-10 w-full rounded-xl"
-    >
-      <img
-        src={gsToHttp(sustainableHabits)}
-        alt=""
-        class="md:h-64 md:mt-10 rounded"
-      />
-      <p class="text-2xl font-semibold text-center">
-        Building Sustainable Habits <br />
-        <span class="font-normal text-base"
-          >Achieving fitness is one thing, but maintaining it is where the real
-          work begins. At Addy Fitness, we understand this, so we seamlessly
-          incorporate fitness into your daily routine, ensuring your progress
-          lasts and becomes a sustainable part of your lifestyle.</span
-        >
+<section class="w-full bg-slate-900 px-4 py-16">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 raleway-font">
+        Transform Your Body, Elevate Your Life
+      </h2>
+      <p class="text-gray-400 baskervville-sc-regular">
+        Using basic data skills you can analysis and improve your business
+        indicators with Around
       </p>
     </div>
-    <div
-      class="bg-[#F4F6F8] flex md:flex-col flex-col-reverse gap-10 items-center p-10 w-full rounded-xl"
-    >
-      <img src={gsToHttp(monitoring)} alt="" class="md:h-64 md:mt-10 rounded" />
 
-      <p class="text-2xl font-semibold text-center">
-        Monitoring and Accountability <br />
-        <span class="font-normal text-base leading-normal"
-          >Our expert coaches do more than just provide diet and training
-          plans—they stand by your side as trusted guides, supporting you
-          through every step of your fitness journey.</span
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      {#each cards as card, index}
+        <div
+          class="transition-transform duration-300 hover:scale-[1.02]
+                 {isWideCard(index) ? 'md:col-span-7' : 'md:col-span-5'}"
         >
-      </p>
+          <div
+            class="bg-white rounded-3xl p-6 h-full
+                   {isWideCard(index)
+              ? 'md:flex md:flex-row-reverse md:gap-6'
+              : 'flex flex-col'}"
+          >
+            <!-- Image Container -->
+            <div
+              class="rounded-2xl overflow-hidden {card.bgColor}
+                     {isWideCard(index) ? 'md:w-1/2' : 'w-full h-48 mb-6'}"
+            >
+              <img
+                src={gsToHttp(card.image)}
+                alt={card.title}
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <!-- Content Container -->
+            <div
+              class={isWideCard(index)
+                ? "md:w-1/2 md:flex md:flex-col md:justify-center"
+                : "w-full"}
+            >
+              <h3 class="text-xl font-bold mb-3 raleway-font">{card.title}</h3>
+              <p class="text-gray-600 mb-4 baskervville-sc-regular">
+                {card.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      {/each}
     </div>
   </div>
-</div>
+</section>
 
 <style>
   .raleway-font {
     font-family: "Raleway", sans-serif;
     font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+  .baskervville-sc-regular {
+    font-family: "Baskervville SC", serif;
+    font-weight: 400;
     font-style: normal;
   }
 </style>
