@@ -1,5 +1,6 @@
 <script>
   import IndividualNutritionCard from "../../lib/NutritionPageComponents/IndividualNutritionCard.svelte";
+  import NutritionHero from "../../lib/NutritionPageComponents/NutritionHero.svelte";
 
   let nutritionCardData = [
     {
@@ -89,6 +90,7 @@
   ];
 </script>
 
+<NutritionHero />
 <div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-4">
   {#each nutritionCardData as individualData (individualData.id)}
     <IndividualNutritionCard individualCardData={individualData} />
