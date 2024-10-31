@@ -13,7 +13,7 @@
   ];
 </script>
 
-<div class="hidden md:flex items-center justify-evenly mt-5">
+<div class="hidden md:flex items-center justify-evenly mt-5 mb-5">
   <a href="/"><img src={gsToHttp(image)} alt="" class="w-56" /></a>
 
   <header class="flex gap-8 justify-center items-center headerOptions">
@@ -25,7 +25,9 @@
       </a>
     {/each}
 
-    <button class="bg-black text-white px-5 py-2 rounded">Sign Up</button>
+    <a href="/signin"
+      ><button class="bg-black text-white px-5 py-2 rounded">Sign In</button></a
+    >
   </header>
 </div>
 
