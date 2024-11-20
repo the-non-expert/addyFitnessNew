@@ -1,6 +1,10 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
   import googleIcon from "$lib/Icons/googleIcon.svg";
+  import { post } from "$lib/api";
+  import { setAuth } from "$lib/stores/auth";
+  import { user } from "$lib/stores/userStore.js";
+  import { goto } from "$app/navigation";
 
   let logo = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
 
@@ -9,13 +13,31 @@
   let showPassword = false;
   let passwordInput = null;
   let emailInput = null;
+  let usernameInput = null;
+  let error = null;
 
   function PasswordVisibility() {
     showPassword = !showPassword;
   }
 
-  function signupSubmission() {
-    console.log("sign up done");
+  async function signupSubmission() {
+    try {
+      const response = await post("/users/signup", {
+        username: usernameInput,
+        email: emailInput,
+        password: passwordInput,
+      });
+      setAuth(response.token, null); // You might want to fetch user data here
+      user.setUser({
+        email: emailInput,
+        username: usernameInput,
+        // Add any other user data you receive from the server
+      });
+      goto("/"); // Redirect to home page after successful signup
+    } catch (err) {
+      console.error(err);
+      error = err.message || "An error occurred during signup";
+    }
   }
 </script>
 
@@ -34,7 +56,7 @@
       <p class="text-left text-5xl mt-5">Create an account</p>
       <p class="mt-3 font-thin text-gray-400">
         Already have an account?
-        <a href="/login">
+        <a href="/signin">
           <span class="text-blue-400 cursor-pointer font-medium underline"
             >Log in</span
           ></a
@@ -43,6 +65,16 @@
     </div>
 
     <div class="w-full flex flex-col gap-4 items-center mt-5">
+      {#if error}
+        <p class="text-red-500 text-center w-10/12">{error}</p>
+      {/if}
+      <!-- Username Input -->
+      <input
+        type="text"
+        placeholder="Username"
+        class="w-10/12 p-3 border border-gray-600 rounded focus:outline-none focus:border-blue-500"
+        bind:value={usernameInput}
+      />
       <!-- Email Input -->
       <input
         type="email"
@@ -79,7 +111,7 @@
 
       <button
         class="w-9/12 p-3 font-bold bg-black text-white rounded-3xl cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-        on:click={signupSubmission}
+        on:click|preventDefault={signupSubmission}
       >
         Start your Journey
       </button>

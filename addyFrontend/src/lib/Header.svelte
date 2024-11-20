@@ -1,5 +1,8 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  import { user } from "$lib/stores/userStore.js";
+  import { token, clearAuth } from "$lib/stores/auth.js";
+  import { goto } from "$app/navigation";
 
   let image = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
 
@@ -11,6 +14,18 @@
     { id: 5, name: "About", redirectUrl: "/about" },
     { id: 6, name: "Contact", redirectUrl: "/contact" },
   ];
+
+  function handleAuth() {
+    if ($token) {
+      // User is logged in, so log them out
+      clearAuth();
+      // The user store will be cleared automatically due to the subscription in userStore.js
+      goto("/");
+    } else {
+      // User is not logged in, redirect to sign in page
+      goto("/signin");
+    }
+  }
 </script>
 
 <div class="hidden md:flex items-center justify-evenly mt-5 mb-5">
@@ -25,9 +40,9 @@
       </a>
     {/each}
 
-    <a href="/signin"
-      ><button class="bg-black text-white px-5 py-2 rounded">Sign In</button></a
-    >
+    <button on:click={handleAuth} class="bg-black text-white px-5 py-2 rounded">
+      {$user ? "Sign Out" : "Sign In"}
+    </button>
   </header>
 </div>
 

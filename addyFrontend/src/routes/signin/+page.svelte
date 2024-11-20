@@ -1,6 +1,10 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
   import googleIcon from "$lib/Icons/googleIcon.svg";
+  import { post } from "$lib/api";
+  import { setAuth } from "$lib/stores/auth";
+  import { user } from "$lib/stores/userStore.js";
+  import { goto } from "$app/navigation";
 
   let logo = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
 
@@ -9,6 +13,7 @@
   let showPassword = false;
   let passwordInput = null;
   let emailInput = null;
+  let error = null;
 
   // Reactive statement to check if inputs are empty
   $: isDisabled = !(emailInput && passwordInput);
@@ -18,8 +23,22 @@
     // passwordInput.type = showPassword ? "text" : "password";
   }
 
-  function loginSubmission() {
-    console.log("clicking the login button");
+  async function loginSubmission() {
+    try {
+      const response = await post("/users/login", {
+        email: emailInput,
+        password: passwordInput,
+      });
+      setAuth(response.token, null); // You might want to fetch user data here
+      user.setUser({
+        email: emailInput,
+        // Add any other user data you receive from the server
+      });
+      goto("/"); // Redirect to home page after successful login
+    } catch (err) {
+      console.error(err);
+      // Handle error (e.g., show an error message to the user)
+    }
   }
 </script>
 
@@ -57,6 +76,9 @@
     <!-- Login Input Fields Section -->
     <div class="w-full flex flex-col gap-4 justify-center items-center">
       <!-- Username Input -->
+      {#if error}
+        <p class="text-red-500 text-center">{error}</p>
+      {/if}
       <input
         type="email"
         placeholder="Your Email"
@@ -99,7 +121,7 @@
 
       <button
         class="w-10/12 p-3 font-bold bg-black text-white rounded-3xl cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-        on:click={loginSubmission}
+        on:click|preventDefault={loginSubmission}
         disabled={isDisabled}
       >
         Log In
