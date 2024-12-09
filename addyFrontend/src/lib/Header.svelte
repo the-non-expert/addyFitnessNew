@@ -3,6 +3,7 @@
   import { user } from "$lib/stores/userStore.js";
   import { token, clearAuth } from "$lib/stores/auth.js";
   import { goto } from "$app/navigation";
+  import { UserCircle } from "lucide-svelte";
 
   let image = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
 
@@ -39,6 +40,17 @@
         </p>
       </a>
     {/each}
+
+    {#if $user}<a href="/profile">
+        <button
+          on:click={goToProfile}
+          class="p-2 hover:text-[#5e17eb] transition-colors"
+          aria-label="Profile"
+        >
+          <UserCircle size={28} />
+        </button></a
+      >
+    {/if}
 
     <button on:click={handleAuth} class="bg-black text-white px-5 py-2 rounded">
       {$user ? "Sign Out" : "Sign In"}

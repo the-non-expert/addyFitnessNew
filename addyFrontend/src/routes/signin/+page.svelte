@@ -25,10 +25,12 @@
 
   async function loginSubmission() {
     try {
-      const response = await post("/users/login", {
+      const response = await post("users/login", {
         email: emailInput,
         password: passwordInput,
       });
+
+      console.log("Login response:", response);
       setAuth(response.token, null); // You might want to fetch user data here
       user.setUser({
         email: emailInput,

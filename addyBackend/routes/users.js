@@ -3,72 +3,86 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const auth = require("../middleware/auth"); // Assuming you have this middleware
 
-// Sign Up
+// Sign Up (existing code)
 router.post("/signup", async (req, res) => {
+  // ... (keep your existing signup logic)
+});
+
+// Login (existing code)
+router.post("/login", async (req, res) => {
+  // ... (keep your existing login logic)
+});
+
+// Get user profile
+router.get("/profile", auth, async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
-    // Check if user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ msg: "User already exists" });
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
     }
-
-    // Create new user
-    user = new User({ username, email, password });
-
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-
-    await user.save();
-
-    // Create and return JWT
-    const payload = { user: { id: user.id } };
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
+    res.json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
 
-// Login
-router.post("/login", async (req, res) => {
+// Update user profile
+router.put("/profile", auth, async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {
+      fullName,
+      phone,
+      dateOfBirth,
+      address,
+      height,
+      weight,
+      fitnessGoals,
+      medicalConditions,
+      dietaryRestrictions,
+      emergencyContact,
+      preferredWorkoutTime,
+      experienceLevel,
+    } = req.body;
 
-    // Check if user exists
-    let user = await User.findOne({ email });
+    // Find user by id (from auth middleware)
+    const user = await User.findById(req.user.id);
+
     if (!user) {
-      return res.status(400).json({ msg: "Invalid Email" });
+      return res.status(404).json({ msg: "User not found" });
     }
 
-    // Validate password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid Password" });
-    }
+    // Update user fields
+    user.fullName = fullName || user.fullName;
+    user.phone = phone || user.phone;
+    user.dateOfBirth = dateOfBirth || user.dateOfBirth;
+    user.address = address || user.address;
+    user.physicalInfo = {
+      height: height || user.physicalInfo?.height,
+      weight: weight || user.physicalInfo?.weight,
+    };
+    user.fitnessInfo = {
+      goals: fitnessGoals || user.fitnessInfo?.goals,
+      medicalConditions:
+        medicalConditions || user.fitnessInfo?.medicalConditions,
+      dietaryRestrictions:
+        dietaryRestrictions || user.fitnessInfo?.dietaryRestrictions,
+      emergencyContact: emergencyContact || user.fitnessInfo?.emergencyContact,
+      preferredWorkoutTime:
+        preferredWorkoutTime || user.fitnessInfo?.preferredWorkoutTime,
+      experienceLevel: experienceLevel || user.fitnessInfo?.experienceLevel,
+    };
 
-    // Create and return JWT
-    const payload = { user: { id: user.id } };
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
+    // Save updated user
+    await user.save();
+
+    // Return updated user without password
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.json(userResponse);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
