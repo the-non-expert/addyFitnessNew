@@ -1,9 +1,10 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let individualCardData;
-
-  console.log();
 </script>
 
 <div
@@ -29,7 +30,7 @@
   </div>
   <button
     class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-black"
-    >See Plans</button
+    on:click={() => dispatch("planClick", individualCardData)}>See Plans</button
   >
 </div>
 
