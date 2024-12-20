@@ -27,12 +27,12 @@
   />
 
   <div
-    class="fixed flex inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2
-             bg-white rounded-2xl z-50 max-w-7xl w-full max-h-[90vh] overflow-y-auto"
+    class="fixed md:flex inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2
+             bg-white rounded-2xl z-50 max-w-7xl w-full max-] overflow-y-auto"
     transition:scale
   >
     <!-- left Side  -->
-    <div class="w-4/12 md:h-[500px]">
+    <div class="md:w-4/12 md:h-[500px]">
       <img
         src={gsToHttp(planData.image)}
         alt={planData.name}
@@ -84,7 +84,7 @@
     </div>
 
     <!-- right side  -->
-    <div class="w-8/12 px-5 py-10">
+    <div class="md:w-8/12 px-5 py-10">
       <div class="flex justify-between items-start">
         <div>
           <h2 class="text-2xl font-bold">{planData.name}</h2>
@@ -101,7 +101,9 @@
       </div>
 
       <!-- Session Info Flex Container -->
-      <div class="flex justify-start gap-x-16 mt-8">
+      <div
+        class="flex flex-col md:flex-row justify-start gap-y-2 gap-x-16 mt-8"
+      >
         <!-- Session Split -->
         <div>
           <h3 class="text-2xl font-semibold text-pink-600 mb-1">
@@ -133,7 +135,7 @@
       </div>
 
       <!-- Pricing Cards -->
-      <div class="grid grid-cols-3 gap-4 mt-7">
+      <div class="grid md:grid-cols-3 grid-cols-1 gap-6 p-2">
         {#each planData.pricing as plan}
           <div class="bg-[#F4F5FF] p-4 rounded-xl relative">
             <h4 class="text-purple-600 font-medium">For {plan.duration}:</h4>
