@@ -5,7 +5,7 @@
   import { goto } from "$app/navigation";
   import { UserCircle } from "lucide-svelte";
 
-  let image = "gs://addyfitness-db121.appspot.com/LOGO RED.png";
+  let image = "gs://addyfitness-db121.appspot.com/LogoBg.png";
 
   let navOptions = [
     { id: 1, name: "Training", redirectUrl: "/training" },
@@ -29,8 +29,10 @@
   }
 </script>
 
-<div class="hidden md:flex items-center justify-evenly my-5">
-  <a href="/"><img src={gsToHttp(image)} alt="" class="w-20" /></a>
+<div class="hidden md:flex items-center justify-between">
+  <a href="/"
+    ><img src={gsToHttp(image)} alt="" class="w-28 object-contain" /></a
+  >
 
   <header class="flex gap-2 justify-center items-center headerOptions">
     {#each navOptions as item (item.id)}
@@ -53,11 +55,13 @@
         </button></a
       >
     {/if}
-
-    <button on:click={handleAuth} class="bg-black text-white px-5 py-2 rounded">
-      {$user ? "Sign Out" : "Sign In"}
-    </button>
   </header>
+  <button
+    on:click={handleAuth}
+    class="bg-black text-white m-5 px-7 py-2 rounded-xl"
+  >
+    {$user ? "Sign Out" : "Sign In"}
+  </button>
 </div>
 
 <style>
