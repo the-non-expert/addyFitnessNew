@@ -87,7 +87,7 @@
                 class="px-8 py-3 text-base transition-colors w-1/2 rounded-t-3xl
                       {activeTab === 'BMI'
                   ? 'bg-[#F6F6F6] text-[#344054]'
-                  : 'bg-white text-[#7F56D9]'}"
+                  : 'bg-white text-[#F41952]'}"
                 on:click={() => (activeTab = "BMI")}
               >
                 Calculate BMI
@@ -181,7 +181,7 @@
                 <div class="flex justify-end items-center gap-4">
                   <button
                     type="submit"
-                    class="px-10 bg-[#7F56D9] text-white py-2 rounded-full text-base hover:bg-purple-700 transition-colors"
+                    class="px-10 bg-[#F41952] text-white py-2 rounded-full text-base hover:bg-purple-700 transition-colors"
                   >
                     Calculate
                   </button>

@@ -32,10 +32,12 @@
 <div class="hidden md:flex items-center justify-evenly my-5">
   <a href="/"><img src={gsToHttp(image)} alt="" class="w-20" /></a>
 
-  <header class="flex gap-8 justify-center items-center headerOptions">
+  <header class="flex gap-2 justify-center items-center headerOptions">
     {#each navOptions as item (item.id)}
       <a href={item.redirectUrl}>
-        <p class="text-lg font-medium montserrat-regular hover:text-[#5e17eb]">
+        <p
+          class="text-lg font-medium hover:bg-[#F41952] px-5 py-2 rounded-xl montserrat-regular hover:text-white"
+        >
           {item.name}
         </p>
       </a>

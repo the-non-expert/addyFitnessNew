@@ -37,7 +37,7 @@
         <!-- Metrics -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <div
-            class="bg-purple-600 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
+            class="bg-[#F41952] text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
             transition:fly={{ y: 20, duration: 600 }}
           >
             <span>100+ Members joined</span>

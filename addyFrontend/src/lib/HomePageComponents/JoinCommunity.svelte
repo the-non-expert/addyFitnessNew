@@ -4,7 +4,7 @@
   let communityImage = "gs://addyfitness-db121.appspot.com/communityNew.png";
 </script>
 
-<section class="relative w-full bg-[#7F56D9] overflow-hidden py-20 px-4">
+<section class="relative w-full bg-[#F41952] overflow-hidden py-20 px-4">
   <!-- Decorative circles -->
   <!-- <div class="absolute inset-0 pointer-events-none">
     <div
