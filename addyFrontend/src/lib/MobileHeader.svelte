@@ -5,10 +5,10 @@
   import { user } from "$lib/stores/userStore.js";
   import { token, clearAuth } from "$lib/stores/auth.js";
   import { goto } from "$app/navigation";
-  import { UserCircle } from "lucide-svelte";
+  import { UserCircle, Menu } from "lucide-svelte";
   import { browser } from "$app/environment";
 
-  let logo = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
+  let logo = "gs://addyfitness-db121.appspot.com/WORDMARK RED.png";
   let isMenuOpen = false;
   let initialRender = true;
 
@@ -92,7 +92,7 @@
 >
   <div class="logo">
     <a href="/" class="block">
-      <img src={gsToHttp(logo)} alt="Logo" class="w-36 h-auto object-contain" />
+      <img src={gsToHttp(logo)} alt="Logo" class="w-20 h-auto object-contain" />
     </a>
   </div>
 
@@ -103,7 +103,7 @@
     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
     aria-expanded={isMenuOpen}
   >
-    X
+    <Menu />
   </button>
 
   <!-- Mobile Navigation Menu -->

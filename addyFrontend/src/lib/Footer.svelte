@@ -1,15 +1,19 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
-  let logo = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
+  let logo = "gs://addyfitness-db121.appspot.com/LOGO WHITE.png";
 </script>
 
 <footer class="bg-[#101828] text-white py-16">
-  <div class="max-w-7xl mx-auto md:px-20 px-7 flex justify-between">
+  <div
+    class="max-w-7xl mx-auto md:px-20 px-7 flex flex-col md:flex-row gap-5 justify-between"
+  >
     <!-- Company Info -->
     <div class="space-y-6">
-      <div class="space-y-2">
+      <div
+        class="space-y-2 flex flex-col justify-center items-center text-center"
+      >
         <!-- Logo -->
-        <img src={gsToHttp(logo)} alt="Addy Fitness" class="h-8" />
+        <img src={gsToHttp(logo)} alt="Addy Fitness" class="md:w-36 w-16" />
 
         <!-- Tagline -->
         <p class="text-white font-bold">The Complete Healthcare Solution</p>
@@ -91,10 +95,10 @@
         </a>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-">
+    <div class="grid grid-cols-2 mt-10 md:grid-cols-3 gap-10">
       <!-- Company Links -->
-      <div>
-        <h3 class="text-lg font-semibold mb-6">Company</h3>
+      <div class="flex flex-col">
+        <h3 class="text-lg font-semibold mb-2">Company</h3>
         <ul class="space-y-2">
           <li>
             <a
@@ -129,7 +133,7 @@
 
       <!-- Services -->
       <div>
-        <h3 class="text-lg font-semibold mb-6">Services</h3>
+        <h3 class="text-lg font-semibold mb-2">Services</h3>
         <ul class="space-y-2">
           <li>
             <a
@@ -156,8 +160,8 @@
       </div>
 
       <!-- Legal -->
-      <div>
-        <h3 class="text-lg font-semibold mb-6">Legal</h3>
+      <div class="">
+        <h3 class="text-lg font-semibold mb-2">Legal</h3>
         <ul class="space-y-2">
           <li>
             <a
