@@ -6,7 +6,7 @@
 
 <div class="relative w-full">
   <!-- Top half background -->
-  <div class="absolute top-0 left-0 w-full h-[65%] bg-slate-900" />
+  <div class="absolute top-0 left-0 w-full h-[65%] bg-slate-900 bg-grid" />
   <!-- Bottom half background -->
   <div class="absolute bottom-0 left-0 w-full h-[35%] bg-white" />
 
@@ -87,5 +87,15 @@
     font-family: "Baskervville SC", serif;
     font-weight: 400;
     font-style: normal;
+  }
+
+  .bg-grid {
+    background-size: 10px 10px;
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   }
 </style>

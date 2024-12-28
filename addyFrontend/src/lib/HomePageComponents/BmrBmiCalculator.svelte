@@ -78,7 +78,7 @@
                 class="px-8 py-3 text-base transition-colors w-1/2 rounded-t-3xl
                       {activeTab === 'BMR'
                   ? 'bg-[#F6F6F6] text-[#344054]'
-                  : 'bg-white text-[#7F56D9]'}"
+                  : 'bg-white text-[#F41952]'}"
                 on:click={() => (activeTab = "BMR")}
               >
                 Calculate BMR
@@ -127,7 +127,7 @@
                         type="radio"
                         bind:group={formData.gender}
                         value="female"
-                        class="w-3 h-3 text-[#7F56D9] border-gray-300 focus:ring-[#7F56D9]"
+                        class="w-3 h-3 accent-[#F41952]"
                       />
                       <span class="ml-2 text-base text-[#344054]">Female</span>
                     </label>
@@ -136,7 +136,7 @@
                         type="radio"
                         bind:group={formData.gender}
                         value="male"
-                        class="w-3 h-3 text-[#7F56D9] border-gray-300 focus:ring-[#7F56D9]"
+                        class="w-3 h-3 accent-[#F41952]"
                       />
                       <span class="ml-2 text-base text-[#344054]">Male</span>
                     </label>
