@@ -20,7 +20,7 @@
     />
   </div>
   <div class=" text-center">
-    <p class="text-2xl font-bold text-[#5e17eb] raleway-font">
+    <p class="text-2xl font-bold text-[#F41952] raleway-font">
       {individualCardData.name}
     </p>
     <!-- <p class="raleway-font">With {individualCardData.coach}</p> -->
@@ -30,7 +30,7 @@
     </p>
   </div>
   <button
-    class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-black"
+    class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-[#F41952]"
     on:click={() => dispatch("planClick", individualCardData)}>See Plans</button
   >
 </div>
