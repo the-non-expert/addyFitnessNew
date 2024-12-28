@@ -25,16 +25,6 @@
         >
           Up
         </p>
-        <div class="mt-3 flex justify-center gap-1">
-          <span class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse"
-          ></span>
-          <span
-            class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse delay-100"
-          ></span>
-          <span
-            class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse delay-200"
-          ></span>
-        </div>
       </div>
     </div>
   {/if}
