@@ -5,7 +5,7 @@
   let searchQuery = "";
 </script>
 
-<div class="w-full bg-[#E5E9FF]">
+<div class="w-full bg-[#F41952]/20">
   <!-- Hero Section -->
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex flex-col-reverse md:flex-row items-center">
@@ -68,11 +68,11 @@
           type="text"
           bind:value={searchQuery}
           placeholder="Search for training programs"
-          class="w-full py-4 pl-12 pr-32 rounded-full border border-gray-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200 outline-none text-gray-600 text-base"
+          class="w-full py-4 pl-12 pr-32 rounded-full border border-gray-200 focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-200 outline-none text-gray-600 text-base"
         />
 
         <button
-          class="absolute right-2 bg-[#7F56D9] text-white px-8 py-2.5 rounded-full hover:bg-purple-700 transition-colors duration-200 text-sm font-medium"
+          class="absolute right-2 bg-[#F41952]/80 hover:bg-[#F41952] text-white px-8 py-2.5 rounded-full transition-colors duration-200 text-sm font-medium"
         >
           Find Now
         </button>

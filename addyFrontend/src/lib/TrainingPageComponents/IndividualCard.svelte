@@ -8,30 +8,57 @@
 </script>
 
 <div
-  class="border border-black rounded-xl p-2 flex flex-col gap-5 shadow shadow-[#5e17eb]"
+  class="relative border border-black rounded-xl p-2 flex flex-col gap-5 shadow shadow-[#5e17eb]"
 >
-  <div class="">
-    <img
-      src={gsToHttp(individualCardData.image)}
-      alt=""
-      class="w-full h-full object-contain rounded-xl"
-    />
-  </div>
-  <div class=" text-center">
-    <p class="text-2xl font-bold text-[#5e17eb] raleway-font">
+  {#if !individualCardData.availability}
+    <div
+      class="absolute inset-0 backdrop-blur-[2px] bg-black/40 rounded-xl flex items-center justify-center transition-all duration-300"
+    >
+      <div class="text-center">
+        <p
+          class="text-white/90 text-4xl font-bold raleway-font tracking-widest"
+        >
+          Warming
+        </p>
+        <p
+          class="text-white/80 text-lg font-bold raleway-font tracking-[0.4em] uppercase mt-1"
+        >
+          Up
+        </p>
+        <div class="mt-3 flex justify-center gap-1">
+          <span class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse"
+          ></span>
+          <span
+            class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse delay-100"
+          ></span>
+          <span
+            class="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse delay-200"
+          ></span>
+        </div>
+      </div>
+    </div>
+  {/if}
+  <img
+    src={gsToHttp(individualCardData.image)}
+    alt=""
+    class="w-full h-full object-contain rounded-xl"
+  />
+  <div class="text-center">
+    <p class="text-2xl font-bold text-[#F41952] raleway-font">
       {individualCardData.name}
     </p>
-    <!-- <p class="raleway-font">With {individualCardData.coach}</p> -->
-
     <p class="mt-2 montserrat-regular">
       {individualCardData.sessions} sessions a week |
       <span>{individualCardData.duration} per session</span>
     </p>
   </div>
   <button
-    class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-black"
-    on:click={() => dispatch("planClick", individualCardData)}>See Plans</button
+    class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-[#F41952]"
+    on:click={() => dispatch("planClick", individualCardData)}
+    disabled={!individualCardData.availability}
   >
+    See Plans
+  </button>
 </div>
 
 <style>
