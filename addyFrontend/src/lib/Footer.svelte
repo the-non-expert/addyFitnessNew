@@ -16,7 +16,7 @@
         <img src={gsToHttp(logo)} alt="Addy Fitness" class="md:w-36 w-16" />
 
         <!-- Tagline -->
-        <p class="text-white font-bold">The Complete Healthcare Solution</p>
+        <p class="text-white font-bold">The Complete Health Solution</p>
       </div>
 
       <!-- Contact Info -->
@@ -39,7 +39,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          +91 9861787335
+          +91 98617 87335
         </a>
         <a
           href="mailto:addyfitness21@gmail.com"
@@ -66,7 +66,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          addyfitness21@gmail.com
+          info@addyfitness.com
         </a>
       </div>
 
@@ -165,7 +165,7 @@
         <ul class="space-y-2">
           <li>
             <a
-              href="/terms"
+              href="/terms&conditions"
               class="text-gray-400 hover:text-white transition-colors"
               >Terms & Conditions</a
             >
@@ -179,7 +179,7 @@
           </li>
           <li>
             <a
-              href="/refund"
+              href="/cancellation&refunds"
               class="text-gray-400 hover:text-white transition-colors"
               >Refund & Cancellation</a
             >

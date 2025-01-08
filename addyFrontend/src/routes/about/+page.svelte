@@ -17,7 +17,7 @@
     {
       id: 2,
       name: "Shreemantha Triptahy",
-      designation: "Founder",
+      designation: "Advisor",
       qualifications: "Asst. Mathematics Prof, OUTR",
       image: "gs://addyfitness-db121.appspot.com/STripathy.jpeg",
     },
@@ -30,10 +30,11 @@
     },
     {
       id: 4,
-      name: "Salini Parida",
-      designation: "Nutritionist",
-      qualifications: "Indian Institute of Public Health",
-      image: "gs://addyfitness-db121.appspot.com/Salini.jpeg",
+      name: "Ayush Jhunjhunwala",
+      designation: "CTO",
+      qualifications: "Software Developer",
+      image:
+        "gs://addyfitness-db121.appspot.com/WhatsApp Image 2021-03-10 at 7.59.46 PM.jpeg",
     },
   ];
 </script>

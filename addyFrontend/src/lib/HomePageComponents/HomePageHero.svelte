@@ -90,7 +90,7 @@
   }
 
   .bg-grid {
-    background-size: 10px 10px;
+    background-size: 20px 20px;
     background-image: linear-gradient(
         to right,
         rgba(255, 255, 255, 0.1) 1px,

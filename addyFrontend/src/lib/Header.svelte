@@ -58,7 +58,8 @@
   </header>
   <button
     on:click={handleAuth}
-    class="bg-black text-white m-5 px-7 py-2 rounded-xl"
+    disabled
+    class="bg-black text-white m-5 px-7 py-2 rounded-xl cursor-not-allowed"
   >
     {$user ? "Sign Out" : "Sign In"}
   </button>
