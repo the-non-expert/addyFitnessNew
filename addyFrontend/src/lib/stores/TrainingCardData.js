@@ -1,6 +1,7 @@
 export const trainingCardData = [
   {
     id: 1,
+    availability: true,
     name: "Live Workout Session",
     coach: "Adnan Ali",
     duration: "60 mins",
@@ -44,6 +45,7 @@ export const trainingCardData = [
   },
   {
     id: 2,
+    availability: false,
     name: "Yoga",
     coach: "Adnan Ali",
     duration: "60 mins",
@@ -87,6 +89,7 @@ export const trainingCardData = [
   },
   {
     id: 3,
+    availability: true,
     name: "HIIT and LIIT (Cardio Vascular)",
     coach: "Adnan Ali",
     duration: "40-50 mins",
@@ -130,6 +133,7 @@ export const trainingCardData = [
   },
   {
     id: 4,
+    availability: false,
     name: "Dance",
     coach: "Adnan Ali",
     duration: "60 mins",
@@ -173,6 +177,7 @@ export const trainingCardData = [
   },
   {
     id: 5,
+    availability: false,
     name: "Zumba",
     coach: "Adnan Ali",
     duration: "60 mins",
@@ -216,6 +221,7 @@ export const trainingCardData = [
   },
   {
     id: 6,
+    availability: true,
     name: "Old-Age Workout",
     coach: "Adnan Ali",
     duration: "60 mins",
