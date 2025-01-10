@@ -4,6 +4,7 @@
   import Footer from "../lib/Footer.svelte";
   import Header from "../lib/Header.svelte";
   import MobileHeader from "../lib/MobileHeader.svelte";
+  import { Toaster } from "svelte-french-toast";
 
   $: activeRoute = $page.url.pathname;
 
@@ -18,6 +19,7 @@
 {/if}
 
 <slot />
+<Toaster />
 
 {#if showFooter}
   <Footer />

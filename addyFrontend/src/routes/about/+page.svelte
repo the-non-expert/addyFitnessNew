@@ -16,25 +16,27 @@
     },
     {
       id: 2,
-      name: "Shreemantha Triptahy",
-      designation: "Advisor",
-      qualifications: "Asst. Mathematics Prof, OUTR",
-      image: "gs://addyfitness-db121.appspot.com/STripathy.jpeg",
-    },
-    {
-      id: 3,
       name: "Swastik Pattnaik",
       designation: "Lead Physician",
       qualifications: "MBBS(Utkal) DGO CPCDM",
       image: "gs://addyfitness-db121.appspot.com/SwastikP.jpeg",
     },
     {
-      id: 4,
+      id: 3,
       name: "Ayush Jhunjhunwala",
       designation: "CTO",
       qualifications: "Software Developer",
       image:
         "gs://addyfitness-db121.appspot.com/WhatsApp Image 2021-03-10 at 7.59.46 PM.jpeg",
+      linkedin: "https://linkedin.com/in/ayush-jhunjhunwala-724472163/",
+      email: "ayushjhun13@gmail.com",
+    },
+    {
+      id: 4,
+      name: "Shreemantha Triptahy",
+      designation: "Advisor",
+      qualifications: "Asst. Mathematics Prof, OUTR",
+      image: "gs://addyfitness-db121.appspot.com/STripathy.jpeg",
     },
   ];
 </script>
