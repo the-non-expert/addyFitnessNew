@@ -28,7 +28,7 @@
         </h1>
 
         <!-- Description -->
-        <p class="text-white max-w-2xl mx-auto text-xl baskervville-sc-regular">
+        <p class="text-gray-400 max-w-2xl mx-auto text-xl inter-font">
           At Addy Fitness, we believe that fitness is more than just a routine –
           it's a lifestyle. Our team of expert trainers is here to create
           personalized fitness and nutrition plans that fit your unique needs
@@ -86,6 +86,12 @@
   .baskervville-sc-regular {
     font-family: "Baskervville SC", serif;
     font-weight: 400;
+    font-style: normal;
+  }
+
+  .inter-font {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
     font-style: normal;
   }
 
