@@ -61,8 +61,12 @@
         {activeTab} Calculator
       </h2>
       <p class="text-gray-600 text-base">
-        Choose the perfect plan for your fitness needs. Flexible and easy to
-        follow
+        {#if activeTab == "BMR"}
+          Discover your daily calorie needs and take control of your fitness
+          journey with our BMR calculator
+        {:else}
+          Know your body better—calculate your BMI for a healthier you!
+        {/if}
       </p>
     </div>
 
