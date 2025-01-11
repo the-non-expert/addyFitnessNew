@@ -16,13 +16,13 @@
       id: 2,
       name: "Whatsapp",
       iconUrl: whatsappIcon,
-      redirectLink: "",
+      redirectLink: "https://wa.me/9861787335",
     },
     {
       id: 3,
       name: "LinkedIn",
       iconUrl: linkedInIcon,
-      redirectLink: "",
+      redirectLink: "https://www.linkedin.com/company/addy-fitness/",
     },
   ];
 </script>
@@ -30,7 +30,7 @@
 <div
   class="p-10 w-full md:w-1/2 flex flex-col gap-4 border shadow-xl rounded-xl"
 >
-  <p class="font-bold text-[#5e17eb] raleway-font">Get in Touch</p>
+  <p class="font-bold text-[#F41952] raleway-font">Get in Touch</p>
   <p class="montserrat-regular">
     We love to hear from you. Our friendly team is always here to contact with
     you
@@ -38,13 +38,13 @@
 
   <div class="flex gap-2">
     <img src={emailIcon} alt="emailIcon" class="w-4" />
-    <p class="font-bold text-[#5e17eb] raleway-font">Chat with Us!</p>
+    <p class="font-bold text-[#F41952] raleway-font">Chat with Us!</p>
   </div>
-  <p class="montserrat-regular">addyfitness21@gmail.com</p>
+  <p class="montserrat-regular">info@addyfitness.com</p>
 
   <div class="flex gap-2">
     <img src={phoneIcon} alt="phoneIcon" class="w-4" />
-    <p class="font-bold text-[#5e17eb] raleway-font">Phone</p>
+    <p class="font-bold text-[#F41952] raleway-font">Phone</p>
   </div>
   <div class="montserrat-regular">
     <p>Mon-Fri from 8am to 5pm.</p>

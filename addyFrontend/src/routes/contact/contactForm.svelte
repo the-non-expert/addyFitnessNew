@@ -43,7 +43,7 @@
   <blockquote class="text-2xl font-semibold italic text-center text-slate-900">
     The
     <span
-      class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-[#5e17eb] relative inline-block"
+      class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-[#F41952] relative inline-block"
     >
       <span class="relative text-white">Complete</span>
     </span>
@@ -68,7 +68,7 @@
       <input
         type="text"
         bind:value={$formData.email}
-        placeholder="addyfitness21@gmail.com"
+        placeholder="info@addyfitness.com"
         class="rounded-lg p-2 w-full text-black placeholder:text-sm outline-none border border-black"
       />
     </div>
@@ -92,7 +92,7 @@
       />
     </div>
     <button
-      class="bg-[#242124] text-white rounded-lg h-12 w-full hover:text-[#5e17eb] hover:border hover:border-black hover:bg-white font-bold"
+      class="bg-[#242124] text-white rounded-lg h-12 w-full hover:text-[#F41952] hover:border hover:border-black hover:bg-white font-bold"
       type="submit">Send Message</button
     >
   </form>
