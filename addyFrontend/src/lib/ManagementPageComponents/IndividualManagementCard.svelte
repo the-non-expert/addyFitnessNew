@@ -28,7 +28,8 @@
   </div>
   <button
     class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-[#F41952]"
-    >Contact Us for More Information</button
+  >
+    <a href="/contact"> Contact Us for More Information </a></button
   >
 </div>
 
