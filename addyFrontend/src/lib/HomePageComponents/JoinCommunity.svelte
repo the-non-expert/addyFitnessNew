@@ -1,7 +1,7 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
 
-  let communityImage = "gs://addyfitness-db121.appspot.com/communityNew.png";
+  let communityImage = "gs://addyfitness-db121.appspot.com/CommunityHome.gif";
 </script>
 
 <section class="relative w-full bg-[#F41952] overflow-hidden py-20 px-4">
@@ -25,11 +25,14 @@
           Are you ready to take control of your fitness journey? At Addy
           Fitness, we'll help you get there.
         </h2>
-        <button
-          class="bg-white text-[#7F56D9] px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors"
+
+        <a href="#">
+          <button
+            class="bg-white text-[#7F56D9] px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors"
+          >
+            Connect to Us
+          </button></a
         >
-          Connect to Us
-        </button>
       </div>
 
       <!-- Right side - Image -->

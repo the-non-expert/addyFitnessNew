@@ -3,10 +3,10 @@
   import HowWeHelpYouMobile from "./HowWeHelpYouMobile.svelte";
 
   const images = {
-    nutrition: "gs://addyfitness-db121.appspot.com/nutritionFuel.png",
-    mascot: "gs://addyfitness-db121.appspot.com/experttraining.png",
-    running: "gs://addyfitness-db121.appspot.com/flexibleTraining.png",
-    doctor: "gs://addyfitness-db121.appspot.com/support.png",
+    nutrition: "gs://addyfitness-db121.appspot.com/NutritionHome.gif",
+    mascot: "gs://addyfitness-db121.appspot.com/ExpertTrainingHome.gif",
+    running: "gs://addyfitness-db121.appspot.com/FlexibleTraining.gif",
+    doctor: "gs://addyfitness-db121.appspot.com/HealthHome.gif",
   };
 
   const cards = [
@@ -30,16 +30,16 @@
     },
     {
       id: 3,
-      title: "Flexible Training for Every Schedule",
+      title: "Flexible Gym Management",
       description:
         "Life is busy, and we get that. That's why Addy Fitness offers flexible plans that fit into your schedule, no matter how hectic it gets.",
       image: images.running,
       bgColor: "bg-green-100",
-      link: "/contact",
+      link: "/management",
     },
     {
       id: 4,
-      title: "Comprehensive Support",
+      title: "Comprehensive HealthCare Support",
       description:
         "Collaborating with hospitals and clinics across India to provide in-person medical support and consultations.",
       image: images.doctor,
@@ -77,11 +77,13 @@
             <!-- For smaller cards (vertical layout) -->
             {#if !isWideCard(index)}
               <div class="flex flex-col h-full">
-                <div class="{card.bgColor} rounded-2xl">
+                <div
+                  class="{card.bgColor} rounded-2xl relative aspect-video overflow-hidden"
+                >
                   <img
                     src={gsToHttp(card.image)}
                     alt={card.title}
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover absolute inset-0"
                   />
                 </div>
                 <div class="flex flex-col flex-grow">
@@ -106,11 +108,13 @@
               </div>
             {:else}
               <div class="flex flex-col md:flex-row-reverse md:gap-8 h-full">
-                <div class="{card.bgColor} rounded-2xl md:w-1/2">
+                <div
+                  class="{card.bgColor} rounded-2xl md:w-1/2 relative aspect-[4/3] overflow-hidden"
+                >
                   <img
                     src={gsToHttp(card.image)}
                     alt={card.title}
-                    class="w-full h-full object-cover rounded-2xl"
+                    class="w-full h-full object-cover absolute inset-0"
                   />
                 </div>
                 <div class="md:w-1/2 flex flex-col justify-between">
