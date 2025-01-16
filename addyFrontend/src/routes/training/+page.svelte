@@ -20,7 +20,7 @@
 </script>
 
 <TrainingHero />
-<div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-4">
+<div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-4">
   {#each trainingCardData as individualData (individualData.id)}
     <IndividualCard
       individualCardData={individualData}
