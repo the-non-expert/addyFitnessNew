@@ -26,7 +26,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -56,7 +56,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -86,7 +86,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -116,7 +116,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -146,7 +146,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -206,7 +206,7 @@ export const nutritionCardData = [
       original: "999",
       discounted: "799",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -236,7 +236,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -266,7 +266,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
   {
@@ -356,7 +356,7 @@ export const nutritionCardData = [
       original: "1199",
       discounted: "999",
       duration: "2 Months",
-      tag: "*30-day money-back guarantee if not satisfied.",
+      tag: " ",
     },
   },
 ];

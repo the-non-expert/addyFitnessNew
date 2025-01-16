@@ -83,12 +83,6 @@
     font-style: normal;
   }
 
-  .baskervville-sc-regular {
-    font-family: "Baskervville SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
   .inter-font {
     font-family: "Inter", serif;
     font-optical-sizing: auto;
@@ -96,12 +90,18 @@
   }
 
   .bg-grid {
-    background-size: 20px 20px;
-    background-image: linear-gradient(
+    background-size: 15px 15px;
+    background-image: 
+      linear-gradient(
         to right,
-        rgba(255, 255, 255, 0.1) 1px,
+        rgba(255, 255, 255, 0.05) 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      );
+    filter: blur(0.5px);
   }
 </style>

@@ -90,7 +90,7 @@
                   <h3 class="text-xl font-bold mb-3 raleway-font">
                     {card.title}
                   </h3>
-                  <p class="text-gray-600 mb-6 baskervville-sc-regular">
+                  <p class="text-gray-600 mb-6 inter-font">
                     {card.description}
                   </p>
                   <div class="mt-auto flex justify-center">
@@ -122,7 +122,7 @@
                     <h3 class="text-xl font-bold mb-3 raleway-font">
                       {card.title}
                     </h3>
-                    <p class="text-gray-600 mb-6 baskervville-sc-regular">
+                    <p class="text-gray-600 mb-6 inter-font">
                       {card.description}
                     </p>
                   </div>
@@ -159,6 +159,12 @@
   .baskervville-sc-regular {
     font-family: "Baskervville SC", serif;
     font-weight: 400;
+    font-style: normal;
+  }
+
+  .inter-font {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
     font-style: normal;
   }
 </style>

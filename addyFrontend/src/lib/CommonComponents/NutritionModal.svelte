@@ -34,7 +34,7 @@
         class="h-1/2 w-full object-cover"
       />
       <div class="bg-[#F4F5FF] px-6 py-10 h-1/2">
-        <h3 class="text-purple-600 text-xl font-medium mb-2">
+        <h3 class="text-[#F41A53] text-xl font-medium mb-2">
           For {planData.pricing.duration}
         </h3>
         <div class="mt-4">
@@ -45,7 +45,7 @@
             Now ₹{planData.pricing.discounted}/- only
           </p>
           <button
-            class="w-full mt-6 bg-[#5E17EB] text-white py-3 rounded-xl hover:bg-purple-700 transition-colors"
+            class="w-full mt-6 bg-[#F41A53]/80 text-white py-3 rounded-xl hover:bg-[#F41A53] transition-colors"
           >
             Buy Now
           </button>
@@ -77,7 +77,7 @@
 
       <!-- Plan Duration -->
       <div class="mt-8">
-        <h3 class="text-xl font-semibold text-purple-600">Plan Duration</h3>
+        <h3 class="text-xl font-semibold text-[#F41A53]">Plan Duration</h3>
         <ul class="space-y-2 ml-7 mt-2">
           <li class="list-disc text-gray-700">
             {planData.planDuration.detail}
@@ -87,7 +87,7 @@
 
       <!-- What do you get? -->
       <div class="mt-8">
-        <h3 class="text-xl font-semibold text-purple-600">What you get ?</h3>
+        <h3 class="text-xl font-semibold text-[#F41A53]">What you get ?</h3>
         <ul class="space-y-2 ml-7 mt-2">
           {#each planData.benefits.features as feature}
             <li class="list-disc text-gray-700">{feature}</li>

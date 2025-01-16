@@ -28,7 +28,7 @@
 
         <a href="#">
           <button
-            class="bg-white text-[#7F56D9] px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors"
+            class="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors"
           >
             Connect to Us
           </button></a
