@@ -129,6 +129,20 @@
               >Contact us</a
             >
           </li>
+          <li>
+            <a
+              href="/contact"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Join Us as a Trainer</a
+            >
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Join Us as a Doctor</a
+            >
+          </li>
         </ul>
       </div>
 

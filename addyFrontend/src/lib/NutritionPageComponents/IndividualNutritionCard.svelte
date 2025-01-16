@@ -10,7 +10,7 @@
 </script>
 
 <div
-  class="border border-black rounded-xl p-2 flex flex-col gap-5 shadow shadow-[#5e17eb]"
+  class="border rounded-xl p-4 flex flex-col gap-5 shadow-xl"
 >
   <div class="">
     <img
