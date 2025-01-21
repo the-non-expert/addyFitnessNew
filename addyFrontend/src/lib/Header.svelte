@@ -5,23 +5,25 @@
   import { goto } from "$app/navigation";
   import { UserCircle } from "lucide-svelte";
 
-  let image = "gs://addyfitness-db121.appspot.com/LogoBg.png";
+  let image = "gs://addyfitness-db121.appspot.com/AddyFitnessTMlogo.png";
 
   let navOptions = [
     { id: 1, name: "Training", redirectUrl: "/training" },
     { id: 2, name: "Nutrition", redirectUrl: "/nutrition" },
     { id: 3, name: "Healthcare", redirectUrl: "/healthcare" },
     { id: 4, name: "Management", redirectUrl: "/management" },
-    { id: 5, name: "About", redirectUrl: "/about" },
-    { id: 6, name: "Contact", redirectUrl: "/contact" },
+    { id: 5, name: "Careers", redirectUrl: "/careers" },
+    { id: 6, name: "Blogs", redirectUrl: "/" },
+    { id: 7, name: "About", redirectUrl: "/about" },
+    { id: 8, name: "Contact", redirectUrl: "/contact" },
   ];
 
   function handleAuth() {
     if ($token) {
       // User is logged in, so log them out
-      clearAuth();
+      // clearAuth();
       // The user store will be cleared automatically due to the subscription in userStore.js
-      goto("/");
+      goto("/profile");
     } else {
       // User is not logged in, redirect to sign in page
       goto("/signin");
@@ -45,23 +47,21 @@
       </a>
     {/each}
 
-    {#if $user}<a href="/profile">
+    <!-- {#if $user}<a href="/profile">
         <button
-          on:click={goToProfile}
           class="p-2 hover:text-[#5e17eb] transition-colors"
           aria-label="Profile"
         >
           <UserCircle size={28} />
         </button></a
       >
-    {/if}
+    {/if} -->
   </header>
   <button
     on:click={handleAuth}
-    disabled
-    class="bg-black text-white m-5 px-7 py-2 rounded-xl cursor-not-allowed"
+    class="bg-black text-white m-5 px-7 py-2 rounded-xl cursor-pointer"
   >
-    {$user ? "Sign Out" : "Sign In"}
+    {$user ? "Go to Profile" : "Sign In"}
   </button>
 </div>
 

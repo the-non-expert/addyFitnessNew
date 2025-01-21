@@ -1,11 +1,16 @@
-const API_URL = "http://localhost:5000/api"; // Adjust this to your backend URL
+const API_URL = "http://localhost:8000";
 
-async function send({ method, path, data, token }) {
+async function send({ method, path, data, token, isFormData = false }) {
   const opts = { method, headers: {} };
 
   if (data) {
-    opts.headers["Content-Type"] = "application/json";
-    opts.body = JSON.stringify(data);
+    if (isFormData) {
+      opts.headers["Content-Type"] = "application/x-www-form-urlencoded";
+      opts.body = data; // data should be URLSearchParams
+    } else {
+      opts.headers["Content-Type"] = "application/json";
+      opts.body = JSON.stringify(data);
+    }
   }
 
   if (token) {
@@ -22,6 +27,6 @@ async function send({ method, path, data, token }) {
   }
 }
 
-export function post(path, data, token) {
-  return send({ method: "POST", path, data, token });
+export function post(path, data, token, isFormData = false) {
+  return send({ method: "POST", path, data, token, isFormData });
 }

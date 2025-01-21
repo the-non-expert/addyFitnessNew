@@ -22,23 +22,44 @@
 
   async function signupSubmission() {
     try {
-      const response = await post("/users/signup", {
-        username: usernameInput,
-        email: emailInput,
-        password: passwordInput,
-      });
-      setAuth(response.token, null); // You might want to fetch user data here
-      user.setUser({
-        email: emailInput,
-        username: usernameInput,
-        // Add any other user data you receive from the server
-      });
-      goto("/"); // Redirect to home page after successful signup
+        // First register the user
+        const registerResponse = await post("/auth/register", {
+            email: emailInput,
+            password: passwordInput,
+            full_name: usernameInput,
+        });
+        console.log("Register response:", registerResponse);
+
+        // Prepare login data
+        const formData = new URLSearchParams({
+            username: emailInput,
+            password: passwordInput
+        });
+        
+        // Attempt login
+        const loginResponse = await post("/auth/login", formData, null, true);
+        console.log("Login response:", loginResponse);
+
+        if (!loginResponse.access_token) {
+            throw new Error('Login response missing access token');
+        }
+
+        // Store the token from login response
+        setAuth(loginResponse.access_token, null);
+        
+        // Set user data
+        user.setUser({
+            email: emailInput,
+            username: usernameInput,
+        });
+
+        goto("/");
+        
     } catch (err) {
-      console.error(err);
-      error = err.message || "An error occurred during signup";
+        console.error("Error:", err);
+        error = err.message || "An error occurred during signup";
     }
-  }
+}
 </script>
 
 <div class="w-full flex gap-10">

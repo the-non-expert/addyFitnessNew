@@ -25,23 +25,32 @@
 
   async function loginSubmission() {
     try {
-      const response = await post("users/login", {
-        email: emailInput,
-        password: passwordInput,
-      });
+        const formData = new URLSearchParams({
+            username: emailInput,     // OAuth2 expects 'username'
+            password: passwordInput
+        });
 
-      console.log("Login response:", response);
-      setAuth(response.token, null); // You might want to fetch user data here
-      user.setUser({
-        email: emailInput,
-        // Add any other user data you receive from the server
-      });
-      goto("/"); // Redirect to home page after successful login
+        const response = await post("/auth/login", formData, null, true);  // true for form data
+        console.log("Login response:", response);
+        
+        if (!response.access_token) {
+            throw new Error('Login failed: No access token received');
+        }
+
+        // Store token - notice it's access_token not token
+        setAuth(response.access_token, null);
+        
+        // Set user data
+        user.setUser({
+            email: emailInput,
+        });
+        
+        goto("/"); 
     } catch (err) {
-      console.error(err);
-      // Handle error (e.g., show an error message to the user)
+        console.error(err);
+        error = err.message || "Invalid email or password";
     }
-  }
+}
 </script>
 
 <div class="w-full flex">
