@@ -18,6 +18,11 @@
   }
 </script>
 
+<svelte:head>
+  <title>Nutrition | AddyFitness</title>
+  <meta name="description" content="Join the AddyFitness team and make a difference in people's lives through fitness and wellness." />
+</svelte:head>
+
 <NutritionHero />
 <div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-4">
   {#each nutritionCardData as individualData (individualData.id)}

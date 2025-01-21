@@ -41,6 +41,11 @@
   ];
 </script>
 
+<svelte:head>
+  <title>About | AddyFitness</title>
+  <meta name="description" content="Join the AddyFitness team and make a difference in people's lives through fitness and wellness." />
+</svelte:head>
+
 <div class="w-full mt-10">
   <!-- Our Mission  -->
   <div class="w-10/12 mx-auto">
