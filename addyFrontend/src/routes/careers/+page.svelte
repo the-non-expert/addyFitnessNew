@@ -3,7 +3,7 @@
     import { onMount } from 'svelte';
     import { fade, fly } from 'svelte/transition';
     import { Users, Stethoscope, Dumbbell, ChevronRight, Medal, Clock, Heart, Trophy } from 'lucide-svelte';
-    import FlipCareerCard from '$lib/components/FlipCareerCard.svelte';
+    import FlipCareerCard from '$lib/Components/FlipCareerCard.svelte';
   
     let isVisible = false;
     
