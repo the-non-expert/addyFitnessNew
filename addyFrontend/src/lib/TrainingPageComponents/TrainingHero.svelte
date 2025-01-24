@@ -9,11 +9,11 @@
   import { createEventDispatcher, onMount, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   const searchTerms = [
-    "Live Interactive Workout Sessions",
-    "Mindful Yoga & Meditation",
+    "Live Workout Sessions",
+    "Yoga",
     "High-Intensity Interval Training",
     "Low-Impact Cardio Workouts", 
-    "Dynamic Dance Fitness",
+    "Dance",
     "Energizing Zumba Classes",
     "Senior-Friendly Exercise Programs"
   ];
