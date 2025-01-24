@@ -74,7 +74,6 @@
               title="Addy Fitness Video"
               class="absolute top-0 left-0 w-full h-full rounded-xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
             ></iframe>
           </div>
         </div>
