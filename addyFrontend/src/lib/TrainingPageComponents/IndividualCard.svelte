@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="relative border border-black rounded-xl p-2 flex flex-col gap-5 shadow shadow-[#5e17eb]"
+  class="relative border rounded-xl p-4 flex flex-col gap-5 shadow-xl"
 >
   {#if !individualCardData.availability}
     <div
