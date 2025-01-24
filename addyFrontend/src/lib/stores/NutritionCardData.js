@@ -124,7 +124,7 @@ export const nutritionCardData = [
     name: "PCOS",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/PCOS.jpeg",
+    image: "gs://addyfitness-db121.appspot.com/PCOS.gif",
     description:
       "Maintain confidentiality and prioritize your health. Register now to discuss, manage, and recover from PCOS with our personalized program.",
     planDuration: {
@@ -274,7 +274,7 @@ export const nutritionCardData = [
     name: "Child Nutrition",
     coach: "Adnan Ali",
     included: "Yearly Plan | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/ChildNutrition.gif",
+    image: "gs://addyfitness-db121.appspot.com/child.gif",
     description:
       "Comprehensive nutrition planning for your child's growth and development.",
     planDuration: {
@@ -334,7 +334,7 @@ export const nutritionCardData = [
     name: "Anaemia",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/kidney.gif",
+    image: "gs://addyfitness-db121.appspot.com/anaemia.gif",
     description:
       "Targeted nutrition plan to improve hemoglobin levels and overall health.",
     planDuration: {
