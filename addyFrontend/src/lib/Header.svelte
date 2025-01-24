@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="hidden md:flex items-center justify-between">
+<div class="hidden md:flex items-center justify-between custom-shadow bg-white sticky top-0 z-50">
   <a href="/"
     ><img src={gsToHttp(image)} alt="" class="w-28 object-contain" /></a
   >
@@ -71,4 +71,24 @@
     font-optical-sizing: auto;
     font-style: normal;
   }
+
+  /* Option 1: Subtle and modern */
+  /* .custom-shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  } */
+
+  /* Option 2: Soft and elegant */
+  .custom-shadow {
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Option 3: Minimal with depth */
+  /* .custom-shadow {
+    box-shadow: 0 2px 10px rgba(17, 17, 26, 0.05);
+  } */
+
+  /* Option 4: Premium feel */
+  /* .custom-shadow {
+    box-shadow: 0 2px 15px rgba(30, 30, 30, 0.03);
+  } */
 </style>
