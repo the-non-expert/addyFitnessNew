@@ -3,7 +3,7 @@
   let logo = "gs://addyfitness-db121.appspot.com/LOGO WHITE.png";
 </script>
 
-<footer class="bg-[#101828] text-white py-16">
+<footer class="bg-[#101828] text-white py-12">
   <div
     class="max-w-7xl mx-auto md:px-20 px-7 flex flex-col md:flex-row gap-5 justify-between"
   >
