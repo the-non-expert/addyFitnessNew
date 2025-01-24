@@ -12,7 +12,7 @@
 
   <!-- Content -->
   <section
-    class="relative w-full min-h-[600px] flex items-center justify-center px-4 py-16"
+    class="relative w-full min-h-[600px] flex items-center justify-center px-4 py-10"
   >
     <div class="max-w-4xl mx-auto text-center">
       <div class="space-y-6">

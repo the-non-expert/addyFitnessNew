@@ -13,6 +13,9 @@
   let bmrResult = null;
   let bmiResult = null;
 
+  let gaugePercentage = 0;
+  let gaugeColor = '#F41952';
+
   function calculateBMR() {
     const weight = parseFloat(formData.weight);
     const height = parseFloat(formData.height);
@@ -50,6 +53,34 @@
     };
     bmrResult = null;
     bmiResult = null;
+  }
+
+  function getBMICategory(bmi) {
+    if (bmi < 18.5) return { category: 'Underweight', color: '#3B82F6', percentage: 25 };
+    if (bmi < 24.9) return { category: 'Normal', color: '#10B981', percentage: 50 };
+    if (bmi < 29.9) return { category: 'Overweight', color: '#F59E0B', percentage: 75 };
+    return { category: 'Obese', color: '#EF4444', percentage: 100 };
+  }
+
+  function getBMRCategory(bmr, gender) {
+    const maxBMR = gender === 'male' ? 2500 : 2000;
+    const percentage = (bmr / maxBMR) * 100;
+    return {
+      percentage: Math.min(percentage, 100),
+      color: '#F41952'
+    };
+  }
+
+  $: {
+    if (activeTab === 'BMI' && bmiResult) {
+      const category = getBMICategory(bmiResult);
+      gaugePercentage = category.percentage;
+      gaugeColor = category.color;
+    } else if (activeTab === 'BMR' && bmrResult) {
+      const category = getBMRCategory(bmrResult, formData.gender);
+      gaugePercentage = category.percentage;
+      gaugeColor = category.color;
+    }
   }
 </script>
 
@@ -226,9 +257,70 @@
               </div>
             {/if}
 
-            <!-- Placeholder for gauge -->
-            <div class="mt-8 w-full aspect-[2/1]">
-              <!-- Gauge will go here -->
+            <!-- gauge -->
+            <div class="mt-8 w-full">
+              {#if (activeTab === 'BMI' && bmiResult) || (activeTab === 'BMR' && bmrResult)}
+                <div class="relative md:w-full md:h-[150px] mx-auto" transition:fade>
+                  <svg viewBox="0 0 200 120" class="w-full h-full">
+                    <path
+                      d="M20 100 A 60 60 0 0 1 180 100"
+                      fill="none"
+                      stroke="#E5E7EB"
+                      stroke-width="8"
+                      stroke-linecap="round"
+                    />
+                    
+                    <path
+                      d="M20 100 A 60 60 0 0 1 180 100"
+                      fill="none"
+                      stroke={gaugeColor}
+                      stroke-width="8"
+                      stroke-linecap="round"
+                      stroke-dasharray="251"
+                      stroke-dashoffset={251 - (251 * gaugePercentage / 100)}
+                      style="transition: stroke-dashoffset 0.5s ease-in-out"
+                    />
+                    <!-- Main value -->
+                    <text
+                      x="100"
+                      y="90"
+                      text-anchor="middle"
+                      class="text-2xl font-bold"
+                      fill={gaugeColor}
+                    >
+                      {activeTab === 'BMI' ? getBMICategory(bmiResult).category : `${Math.round(gaugePercentage)}%`}
+                    </text>
+                  </svg>
+
+                  <!-- Description text below gauge -->
+                  <div class="mt-4 text-center">
+                    {#if activeTab === 'BMI'}
+                      <p class="text-sm text-gray-600">
+                        {#if bmiResult < 18.5}
+                          You are underweight. Consider consulting a healthcare provider about healthy weight gain strategies.
+                        {:else if bmiResult < 24.9}
+                          Your BMI is within the healthy range. Keep maintaining your healthy lifestyle!
+                        {:else if bmiResult < 29.9}
+                          You are in the overweight range. Consider moderate lifestyle changes for better health.
+                        {:else}
+                          Your BMI indicates obesity. We recommend consulting a healthcare provider for personalized advice.
+                        {/if}
+                      </p>
+                    {:else}
+                      <p class="text-sm text-gray-600">
+                        Your Basal Metabolic Rate is {bmrResult} calories per day. This represents the minimum energy needed to maintain basic life functions while at rest.
+                        {#if gaugePercentage > 75}
+                          This is above average for your gender, indicating a higher metabolic rate.
+                        {:else if gaugePercentage < 25}
+                          This is below average for your gender, indicating a lower metabolic rate.
+                        {:else}
+                          This is within the typical range for your gender.
+                        {/if}
+                      </p>
+                    {/if}
+                  </div>
+                </div>
+              {/if}
             </div>
           </div>
         </div>
