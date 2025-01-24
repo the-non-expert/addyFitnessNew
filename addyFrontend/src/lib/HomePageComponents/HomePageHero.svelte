@@ -2,6 +2,7 @@
   import { fly } from "svelte/transition";
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
   let homeHeroImage = "gs://addyfitness-db121.appspot.com/homeheroImage.png";
+  let homeHeroVid = "gs://addyfitness-db121.appspot.com/AddyHeroVid.mp4";
 </script>
 
 <div class="relative w-full">
@@ -69,7 +70,7 @@
         <div class="items-center justify-center">
           <div class="relative mt-20 mx-auto max-w-lg w-full aspect-video">
             <iframe
-              src="https://www.youtube.com/embed/IwFPIfrwaII?autoplay=1&mute=1"
+              src={gsToHttp(homeHeroVid)}
               title="Addy Fitness Video"
               class="absolute top-0 left-0 w-full h-full rounded-xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
