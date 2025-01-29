@@ -4,7 +4,7 @@ export const nutritionCardData = [
     name: "Weight Loss",
     coach: "Adnan Ali",
     included: "2 Months Plan | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/weightLoss.gif",
+    image: "gs://addyfitness-db121.appspot.com/weightLoss1.gif",
     description:
       "[ Confidentiality Maintain and focus on health. Extended register here to discuss, manage and recover ]",
     planDuration: {
@@ -184,7 +184,7 @@ export const nutritionCardData = [
     name: "Senior Nutrition",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/ChildNutrition.gif",
+    image: "gs://addyfitness-db121.appspot.com/oldAge.gif",
     description:
       "Specialized nutrition plan designed for seniors to maintain health and vitality.",
     planDuration: {
@@ -274,7 +274,7 @@ export const nutritionCardData = [
     name: "Child Nutrition",
     coach: "Adnan Ali",
     included: "Yearly Plan | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/child.gif",
+    image: "gs://addyfitness-db121.appspot.com/ChildNutrition.gif",
     description:
       "Comprehensive nutrition planning for your child's growth and development.",
     planDuration: {
