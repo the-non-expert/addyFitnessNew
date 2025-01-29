@@ -1,4 +1,4 @@
-import { API_URL } from '$env/static/public';
+import { API_URL } from '$env/static/private'; // Updated import to use the correct path
 
 const API_URLL = API_URL || "http://localhost:8000";
 
