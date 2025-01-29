@@ -1,5 +1,8 @@
-const API_URL = process.env.VITE_API_URL || "http://localhost:8000";
+const API_URL = process.env.VITE_API_URL || "https://api.addyfitness.com";
 console.log(API_URL, process.env.VITE_API_URL)
+
+console.log('All env vars:', import.meta.env);
+console.log('Specific API URL:', import.meta.env.VITE_API_URL);
 
 async function send({ method, path, data, token, isFormData = false }) {
   const opts = { method, headers: {} };
