@@ -1,8 +1,4 @@
-import { API_URL } from '$env/static/private'; // Updated import to use the correct path
-
-const API_URLL = API_URL || "http://localhost:8000";
-
-// Rest of your code stays the same...
+const API_URL = import.meta.env.API_URL || "http://localhost:8000";
 
 async function send({ method, path, data, token, isFormData = false }) {
   const opts = { method, headers: {} };
@@ -21,7 +17,7 @@ async function send({ method, path, data, token, isFormData = false }) {
     opts.headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URLL}${path}`, opts);
+  const res = await fetch(`${API_URL}${path}`, opts);
   const json = await res.json();
 
   if (res.ok) {
