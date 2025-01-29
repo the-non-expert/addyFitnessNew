@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.API_URL || "http://localhost:8000";
+console.log(API_URL, import.meta.env.API_URL)
 
 async function send({ method, path, data, token, isFormData = false }) {
   const opts = { method, headers: {} };
