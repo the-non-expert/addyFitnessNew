@@ -24,6 +24,8 @@ async function send({ method, path, data, token, isFormData = false }) {
   const res = await fetch(`${API_URL}${path}`, opts);
   const json = await res.json();
 
+  console.log(json)
+
   if (res.ok) {
     return json;
   } else {
