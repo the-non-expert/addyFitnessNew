@@ -1,7 +1,12 @@
 <script>
   import { user } from "$lib/stores/userStore.js";
   import { token } from "$lib/stores/auth.js";
-  import { fetchUserProfile, updateUserProfile } from "$lib/services/profile.js";
+  import { clearAuth } from "$lib/stores/auth.js"; 
+  import { goto } from "$app/navigation";
+  import {
+    fetchUserProfile,
+    updateUserProfile,
+  } from "$lib/services/profile.js";
   import {
     Edit2,
     Save,
@@ -18,10 +23,10 @@
     Clock,
     Star,
     AlertCircle,
-    Coffee
+    Coffee,
   } from "lucide-svelte";
   import { onMount } from "svelte";
-  import { fade, fly } from 'svelte/transition';
+  import { fade, fly } from "svelte/transition";
 
   let isEditing = false;
   let isLoading = false;
@@ -45,7 +50,7 @@
     emergency_contact_number: "",
     preferred_workout_time: "",
     experience_level: "",
-    reports: null
+    reports: null,
   };
 
   onMount(async () => {
@@ -68,7 +73,7 @@
       success = "Profile updated successfully!";
       error = null;
       originalUserData = { ...userData };
-      setTimeout(() => success = null, 3000);
+      setTimeout(() => (success = null), 3000);
     } catch (err) {
       error = "Failed to save changes";
       console.error(err);
@@ -91,16 +96,30 @@
     }
   }
 
+  function handleSignOut(event){
+    clearAuth();
+
+    goto("/")
+  }
+
   const experienceLevels = ["Beginner", "Intermediate", "Advanced", "Expert"];
-  const workoutTimes = ["Early Morning", "Morning", "Afternoon", "Evening", "Night"];
+  const workoutTimes = [
+    "Early Morning",
+    "Morning",
+    "Afternoon",
+    "Evening",
+    "Night",
+  ];
 </script>
 
 <div class="min-h-screen bg-gray-50/50 py-12">
   <div class="container mx-auto px-4">
     {#if error}
-      <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg mb-6" 
-           role="alert" 
-           transition:fly="{{ y: -20, duration: 300 }}">
+      <div
+        class="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg mb-6"
+        role="alert"
+        transition:fly={{ y: -20, duration: 300 }}
+      >
         <div class="flex items-center">
           <AlertCircle class="text-red-400 mr-3" size={20} />
           <span class="text-red-700">{error}</span>
@@ -109,23 +128,31 @@
     {/if}
 
     {#if success}
-      <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-lg mb-6" 
-           role="alert" 
-           transition:fly="{{ y: -20, duration: 300 }}">
+      <div
+        class="bg-green-50 border-l-4 border-green-400 p-4 rounded-lg mb-6"
+        role="alert"
+        transition:fly={{ y: -20, duration: 300 }}
+      >
         <span class="text-green-700">{success}</span>
       </div>
     {/if}
 
     <!-- Header Section -->
     <div class="bg-white rounded-xl shadow-sm p-8 mb-8" transition:fade>
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8"
+      >
         <div class="flex items-center gap-6">
           <div class="relative group">
-            <div class="w-28 h-28 bg-gradient-to-br from-[#F41A53] to-pink-600 rounded-full flex items-center justify-center text-white transform transition-all duration-300 hover:scale-105">
+            <div
+              class="w-28 h-28 bg-gradient-to-br from-[#F41A53] to-pink-600 rounded-full flex items-center justify-center text-white transform transition-all duration-300 hover:scale-105"
+            >
               <User size={48} />
             </div>
             {#if isEditing}
-              <button class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+              <button
+                class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
                 <Upload size={16} class="text-[#F41A53]" />
               </button>
             {/if}
@@ -140,8 +167,14 @@
             </p>
           </div>
         </div>
-        
+
         <div class="flex gap-3">
+          <button
+          on:click={handleSignOut}
+            class="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white bg-black/80 hover:bg-black transition-all duration-300 shadow-lg hover:shadow-xl"
+            >Sign Out</button
+          >
+
           {#if isEditing}
             <button
               on:click={handleCancel}
@@ -164,7 +197,7 @@
             </button>
           {:else}
             <button
-              on:click={() => isEditing = true}
+              on:click={() => (isEditing = true)}
               class="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white bg-[#F41A53] hover:bg-[#d91447] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <Edit2 size={20} />
@@ -183,9 +216,11 @@
         <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
           <div class="flex items-center gap-3 mb-6">
             <User class="text-[#F41A53]" size={24} />
-            <h3 class="text-xl font-semibold text-gray-900">Personal Information</h3>
+            <h3 class="text-xl font-semibold text-gray-900">
+              Personal Information
+            </h3>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
               <label class="text-sm font-medium text-gray-600">Full Name</label>
@@ -197,7 +232,9 @@
                   placeholder="Enter your full name"
                 />
               {:else}
-                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">{userData.full_name || "Not provided"}</p>
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  {userData.full_name || "Not provided"}
+                </p>
               {/if}
             </div>
 
@@ -226,13 +263,17 @@
                     placeholder="Enter phone number"
                   />
                 {:else}
-                  <p class="text-gray-900 p-3 bg-gray-50 rounded-lg w-full">{userData.phone || "Not provided"}</p>
+                  <p class="text-gray-900 p-3 bg-gray-50 rounded-lg w-full">
+                    {userData.phone || "Not provided"}
+                  </p>
                 {/if}
               </div>
             </div>
 
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-600">Date of Birth</label>
+              <label class="text-sm font-medium text-gray-600"
+                >Date of Birth</label
+              >
               <div class="flex items-center gap-2">
                 <Calendar size={16} class="text-gray-400" />
                 {#if isEditing}
@@ -243,7 +284,9 @@
                   />
                 {:else}
                   <p class="text-gray-900 p-3 bg-gray-50 rounded-lg w-full">
-                    {userData.date_of_birth ? new Date(userData.date_of_birth).toLocaleDateString() : "Not provided"}
+                    {userData.date_of_birth
+                      ? new Date(userData.date_of_birth).toLocaleDateString()
+                      : "Not provided"}
                   </p>
                 {/if}
               </div>
@@ -261,7 +304,9 @@
                     placeholder="Enter your address"
                   ></textarea>
                 {:else}
-                  <p class="text-gray-900 p-3 bg-gray-50 rounded-lg w-full">{userData.address || "Not provided"}</p>
+                  <p class="text-gray-900 p-3 bg-gray-50 rounded-lg w-full">
+                    {userData.address || "Not provided"}
+                  </p>
                 {/if}
               </div>
             </div>
@@ -272,14 +317,13 @@
         <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
           <div class="flex items-center gap-3 mb-6">
             <Activity class="text-[#F41A53]" size={24} />
-            <h3 class="text-xl font-semibold text-gray-900">Physical Information</h3>
+            <h3 class="text-xl font-semibold text-gray-900">
+              Physical Information
+            </h3>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {#each [
-              ["height", "Height (cm)", "Enter height"],
-              ["weight", "Weight (kg)", "Enter weight"]
-            ] as [key, label, placeholder]}
+            {#each [["height", "Height (cm)", "Enter height"], ["weight", "Weight (kg)", "Enter weight"]] as [key, label, placeholder]}
               <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-600">{label}</label>
                 {#if isEditing}
@@ -287,11 +331,13 @@
                     type="number"
                     bind:value={userData[key]}
                     class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
-                    placeholder={placeholder}
+                    {placeholder}
                   />
                 {:else}
                   <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                    {userData[key] ? `${userData[key]} ${key === 'height' ? 'cm' : 'kg'}` : "Not provided"}
+                    {userData[key]
+                      ? `${userData[key]} ${key === "height" ? "cm" : "kg"}`
+                      : "Not provided"}
                   </p>
                 {/if}
               </div>
@@ -303,12 +349,16 @@
         <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
           <div class="flex items-center gap-3 mb-6">
             <AlertCircle class="text-[#F41A53]" size={24} />
-            <h3 class="text-xl font-semibold text-gray-900">Health Information</h3>
+            <h3 class="text-xl font-semibold text-gray-900">
+              Health Information
+            </h3>
           </div>
-          
+
           <div class="space-y-6">
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-600">Medical Conditions</label>
+              <label class="text-sm font-medium text-gray-600"
+                >Medical Conditions</label
+              >
               {#if isEditing}
                 <textarea
                   bind:value={userData.medical_conditions}
@@ -318,13 +368,16 @@
                 ></textarea>
               {:else}
                 <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {userData.medical_conditions || "No medical conditions listed"}
+                  {userData.medical_conditions ||
+                    "No medical conditions listed"}
                 </p>
               {/if}
             </div>
 
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-600">Dietary Restrictions</label>
+              <label class="text-sm font-medium text-gray-600"
+                >Dietary Restrictions</label
+              >
               {#if isEditing}
                 <textarea
                   bind:value={userData.dietary_restrictions}
@@ -334,21 +387,29 @@
                 ></textarea>
               {:else}
                 <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {userData.dietary_restrictions || "No dietary restrictions listed"}
+                  {userData.dietary_restrictions ||
+                    "No dietary restrictions listed"}
                 </p>
               {/if}
             </div>
 
             <!-- Medical Documents -->
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-600">Medical Documents</label>
+              <label class="text-sm font-medium text-gray-600"
+                >Medical Documents</label
+              >
               {#if isEditing}
                 <div class="mt-2">
                   <label
                     class="cursor-pointer group flex items-center justify-center gap-2 p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-[#F41A53] transition-all duration-300"
                   >
-                    <Upload size={20} class="text-gray-400 group-hover:text-[#F41A53]" />
-                    <span class="text-gray-600 group-hover:text-[#F41A53]">Upload Documents</span>
+                    <Upload
+                      size={20}
+                      class="text-gray-400 group-hover:text-[#F41A53]"
+                    />
+                    <span class="text-gray-600 group-hover:text-[#F41A53]"
+                      >Upload Documents</span
+                    >
                     <input
                       type="file"
                       class="hidden"
@@ -358,7 +419,9 @@
                     />
                   </label>
                   {#if userData.reports}
-                    <p class="mt-2 text-sm text-gray-600 flex items-center gap-2">
+                    <p
+                      class="mt-2 text-sm text-gray-600 flex items-center gap-2"
+                    >
                       <span>📎</span>
                       {userData.reports.name}
                     </p>
@@ -370,7 +433,9 @@
                   <span class="text-gray-900">{userData.reports.name}</span>
                 </div>
               {:else}
-                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">No documents uploaded</p>
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  No documents uploaded
+                </p>
               {/if}
             </div>
           </div>
@@ -385,7 +450,7 @@
             <Heart class="text-[#F41A53]" size={24} />
             <h3 class="text-xl font-semibold text-gray-900">Fitness Goals</h3>
           </div>
-          
+
           {#if isEditing}
             <textarea
               bind:value={userData.goals}
@@ -394,7 +459,9 @@
               placeholder="What are your fitness goals?"
             ></textarea>
           {:else}
-            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">{userData.goals || "Not provided"}</p>
+            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+              {userData.goals || "Not provided"}
+            </p>
           {/if}
         </div>
 
@@ -402,107 +469,119 @@
         <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
           <div class="flex items-center gap-3 mb-6">
             <Clock class="text-[#F41A53]" size={24} />
-            <h3 class="text-xl font-semibold text-gray-900">Workout Preferences</h3>
+            <h3 class="text-xl font-semibold text-gray-900">
+              Workout Preferences
+            </h3>
           </div>
-          
+
           <div class="space-y-6">
             <div class="space-y-2">
-              <label class="text-sm font-medium text-gray-600">Preferred Time</label>
+              <label class="text-sm font-medium text-gray-600"
+                >Preferred Time</label
+              >
               {#if isEditing}
-              <select
-              bind:value={userData.preferred_workout_time}
-              class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
-            >
-              <option value="">Select preferred time</option>
-              {#each workoutTimes as time}
-                <option value={time}>{time}</option>
-              {/each}
-            </select>
-          {:else}
-            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-              {userData.preferred_workout_time || "Not provided"}
-            </p>
-          {/if}
+                <select
+                  bind:value={userData.preferred_workout_time}
+                  class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
+                >
+                  <option value="">Select preferred time</option>
+                  {#each workoutTimes as time}
+                    <option value={time}>{time}</option>
+                  {/each}
+                </select>
+              {:else}
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  {userData.preferred_workout_time || "Not provided"}
+                </p>
+              {/if}
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-gray-600"
+                >Experience Level</label
+              >
+              {#if isEditing}
+                <select
+                  bind:value={userData.experience_level}
+                  class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
+                >
+                  <option value="">Select experience level</option>
+                  {#each experienceLevels as level}
+                    <option value={level}>{level}</option>
+                  {/each}
+                </select>
+              {:else}
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  {userData.experience_level || "Not provided"}
+                </p>
+              {/if}
+            </div>
+          </div>
         </div>
 
-        <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-600">Experience Level</label>
-          {#if isEditing}
-            <select
-              bind:value={userData.experience_level}
-              class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
-            >
-              <option value="">Select experience level</option>
-              {#each experienceLevels as level}
-                <option value={level}>{level}</option>
-              {/each}
-            </select>
-          {:else}
-            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-              {userData.experience_level || "Not provided"}
-            </p>
-          {/if}
-        </div>
-      </div>
-    </div>
+        <!-- Emergency Contact -->
+        <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
+          <div class="flex items-center gap-3 mb-6">
+            <Phone class="text-[#F41A53]" size={24} />
+            <h3 class="text-xl font-semibold text-gray-900">
+              Emergency Contact
+            </h3>
+          </div>
 
-    <!-- Emergency Contact -->
-    <div class="bg-white rounded-xl shadow-sm p-8" transition:fade>
-      <div class="flex items-center gap-3 mb-6">
-        <Phone class="text-[#F41A53]" size={24} />
-        <h3 class="text-xl font-semibold text-gray-900">Emergency Contact</h3>
-      </div>
-      
-      <div class="space-y-6">
-        <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-600">Contact Name</label>
-          {#if isEditing}
-            <input
-              type="text"
-              bind:value={userData.emergency_contact_name}
-              class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
-              placeholder="Enter emergency contact name"
-            />
-          {:else}
-            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-              {userData.emergency_contact_name || "Not provided"}
-            </p>
-          {/if}
-        </div>
+          <div class="space-y-6">
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-gray-600"
+                >Contact Name</label
+              >
+              {#if isEditing}
+                <input
+                  type="text"
+                  bind:value={userData.emergency_contact_name}
+                  class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
+                  placeholder="Enter emergency contact name"
+                />
+              {:else}
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  {userData.emergency_contact_name || "Not provided"}
+                </p>
+              {/if}
+            </div>
 
-        <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-600">Contact Number</label>
-          {#if isEditing}
-            <input
-              type="tel"
-              bind:value={userData.emergency_contact_number}
-              class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
-              placeholder="Enter emergency contact number"
-            />
-          {:else}
-            <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
-              {userData.emergency_contact_number || "Not provided"}
-            </p>
-          {/if}
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-gray-600"
+                >Contact Number</label
+              >
+              {#if isEditing}
+                <input
+                  type="tel"
+                  bind:value={userData.emergency_contact_number}
+                  class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#F41A53] focus:border-transparent transition-all duration-300"
+                  placeholder="Enter emergency contact number"
+                />
+              {:else}
+                <p class="text-gray-900 p-3 bg-gray-50 rounded-lg">
+                  {userData.emergency_contact_number || "Not provided"}
+                </p>
+              {/if}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-</div>
 
 <style>
-:global(.animate-spin) {
-animation: spin 1s linear infinite;
-}
+  :global(.animate-spin) {
+    animation: spin 1s linear infinite;
+  }
 
-@keyframes spin {
-from {
-  transform: rotate(0deg);
-}
-to {
-  transform: rotate(360deg);
-}
-}
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
