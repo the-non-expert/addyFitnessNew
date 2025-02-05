@@ -1,7 +1,7 @@
 import { clearAuth } from "$lib/stores/auth.js"; // Import clearAuth function
 
-// const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = "http://localhost:8000"
+const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = "http://localhost:8000"
 // console.log('API URL:', API_URL);
 // console.log('All env vars:', import.meta.env);
 
