@@ -5,6 +5,7 @@
   import Header from "../lib/Header.svelte";
   import MobileHeader from "../lib/MobileHeader.svelte";
   import { Toaster } from "svelte-french-toast";
+  import CountdownTimer from "../lib/CountdownTimer.svelte";
 
   $: activeRoute = $page.url.pathname;
 
@@ -13,12 +14,14 @@
   $: showFooter = !noHeaderFooterRoutes.includes(activeRoute);
 </script>
 
-{#if showHeader}
+<CountdownTimer/>
+
+<!-- {#if showHeader}
   <Header />
   <MobileHeader />
-{/if}
+{/if} -->
 
-<slot />
+<!-- <slot /> -->
 <Toaster />
 
 <!-- Floating WhatsApp Button -->
@@ -45,6 +48,7 @@
   </p>
 </a>
 
-{#if showFooter}
+<!-- {#if showFooter}
   <Footer />
-{/if}
+{/if} -->
+

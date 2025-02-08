@@ -2,7 +2,7 @@
   import { fly } from "svelte/transition";
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
   let homeHeroImage = "gs://addyfitness-db121.appspot.com/homeheroImage.png";
-  let homeHeroVid = "gs://addyfitness-db121.appspot.com/AddyHeroVid.mp4";
+  let homeHeroVid = "gs://addyfitness-db121.appspot.com/homePageNewVideo.mp4";
 </script>
 
 <div class="relative w-full">
