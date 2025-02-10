@@ -40,9 +40,9 @@
   let selectedTrainingType = "Batch Training"; // "batch" or "personal"
   let selectedTimeSlot = planData.trainingTypes.timeSlots[0];
 
-  onMount(()=>{
-    handleUser()
-  })
+  // onMount(()=>{
+  //   handleUser()
+  // })
   onMount(async () => {
     // Load Razorpay script when component mounts
     await loadRazorpay();
