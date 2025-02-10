@@ -5,3 +5,4 @@ export function gsToHttp(gsUrl) {
   const encodedFilePath = encodeURIComponent(filePath);
   return `${baseUrl}${encodedFilePath}?alt=media`;
 }
+

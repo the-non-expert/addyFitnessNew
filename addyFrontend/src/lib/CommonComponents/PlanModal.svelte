@@ -1,8 +1,15 @@
 <script>
   import { fade, scale } from "svelte/transition";
-  import { X, CircleX } from "lucide-svelte";
+  import { X, CircleX, GhostIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  import { paymentStore } from "$lib/stores/payment";
+  import { loadRazorpay, initializeRazorpay } from "$lib/utils/paymentUtils";
+  import { createOrder } from "$lib/services/paymentService";
+  import { onMount } from "svelte";
+  import { user } from "$lib/stores/userStore.js";
+  import { goto } from "$app/navigation";
+
 
   export let isOpen;
   export let planData;
@@ -10,6 +17,21 @@
   console.log("planData", planData);
 
   const dispatch = createEventDispatcher();
+  let isLoading = false;
+  let error = null;
+  let ctaButton = "";
+
+  // Reactive statement to update CTA based on user state
+  $: if ($user) {
+    ctaButton = "Buy Now";
+  } else {
+    ctaButton = "Sign In";
+  }
+
+  async function handleSignIn() {
+    handleClose();
+    window.location.href = '/signin';
+  }
 
   function handleClose() {
     dispatch("close");
@@ -17,6 +39,67 @@
 
   let selectedTrainingType = "Batch Training"; // "batch" or "personal"
   let selectedTimeSlot = planData.trainingTypes.timeSlots[0];
+
+  onMount(()=>{
+    handleUser()
+  })
+  onMount(async () => {
+    // Load Razorpay script when component mounts
+    await loadRazorpay();
+  });
+
+  async function handlePayment(plan) {
+    try {
+      isLoading = true;
+      error = null;
+
+      // Create order data
+      const orderData = {
+        title: `${planData.name} - ${selectedTrainingType}`,
+        amount: plan.price,
+        start_date: new Date(), // You might want to calculate this based on selectedTimeSlot
+        end_date: new Date(Date.now() + getDurationInDays(plan.duration) * 24 * 60 * 60 * 1000)
+      };
+
+      console.log('Sending order data:', orderData);
+      console.log('Authorization token:', localStorage.getItem('token')); // Check token
+
+      // Create order on backend
+      const orderDetails = await createOrder(orderData);
+
+      console.log('Response:', orderDetails);
+      
+      // Initialize Razorpay with order details
+      initializeRazorpay(orderDetails, (result) => {
+        // Handle successful payment
+        dispatch('paymentSuccess', {
+          plan,
+          selectedTimeSlot,
+          selectedTrainingType
+        });
+      });
+
+    } catch (err) {
+      error = err.message;
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  function getDurationInDays(duration) {
+    // Convert duration string to days
+    const [number, unit] = duration.split(' ');
+    switch (unit.toLowerCase()) {
+      case 'months':
+      case 'month':
+        return number * 30;
+      case 'weeks':
+      case 'week':
+        return number * 7;
+      default:
+        return number;
+    }
+  }
 </script>
 
 {#if isOpen}
@@ -151,10 +234,19 @@
               {/if} -->
 
               <button
-                class="w-full mt-4 bg-pink-400 text-white py-3 rounded-xl hover:bg-pink-600 transition-colors"
-              >
-                Buy Now
-              </button>
+              class="w-full mt-4 bg-pink-400 text-white py-3 rounded-xl hover:bg-pink-600 transition-colors
+                     disabled:bg-gray-400 disabled:cursor-not-allowed"
+                     on:click={() => {
+                      if ($user) {
+                        handlePayment(plan);
+                      } else {
+                        handleSignIn();
+                      }
+                    }}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Processing...' : ctaButton}
+            </button>
             </div>
           </div>
         {/each}
@@ -162,6 +254,7 @@
     </div>
   </div>
 {/if}
+
 
 <style>
   /* Add any additional styles here */

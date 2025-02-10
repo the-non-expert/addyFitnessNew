@@ -14,14 +14,14 @@
   $: showFooter = !noHeaderFooterRoutes.includes(activeRoute);
 </script>
 
-<CountdownTimer/>
+<!-- <CountdownTimer/> -->
 
-<!-- {#if showHeader}
+{#if showHeader}
   <Header />
   <MobileHeader />
-{/if} -->
+{/if}
 
-<!-- <slot /> -->
+<slot />
 <Toaster />
 
 <!-- Floating WhatsApp Button -->

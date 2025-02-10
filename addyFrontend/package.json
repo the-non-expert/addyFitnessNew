@@ -21,6 +21,7 @@
 	"type": "module",
 	"dependencies": {
 		"lucide-svelte": "^0.460.1",
+		"razorpay": "^2.9.5",
 		"svelte-french-toast": "^1.2.0"
 	}
 }
