@@ -4,6 +4,7 @@ import { browser } from '$app/environment';
 const createCheckoutStore = () => {
     const defaultValue = {
         planData: null,
+        planType: null, // 'training' or 'nutrition'
         selectedPlan: null,
         selectedTrainingType: null,
         selectedTimeSlot: null

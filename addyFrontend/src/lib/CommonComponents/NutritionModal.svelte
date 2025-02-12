@@ -3,6 +3,9 @@
   import { X, CircleX } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  import { user } from "$lib/stores/userStore.js";
+  import { goto } from "$app/navigation";
+  import { checkoutStore } from '$lib/stores/checkoutStore';
 
   export let isOpen;
   export let planData;
@@ -11,6 +14,42 @@
 
   function handleClose() {
     dispatch("close");
+  }
+
+  async function handleClick() {
+    const checkoutData = {
+        planType: 'nutrition',
+        planData: {
+            name: planData.name,
+            description: planData.description,
+            included: planData.included,
+            coach: planData.coach,
+            image: gsToHttp(planData.image)
+        },
+        pricing: {
+            original: planData.pricing.original,
+            discounted: planData.pricing.discounted,
+            duration: planData.pricing.duration,
+            tag: planData.pricing.tag
+        },
+        benefits: planData.benefits.features,
+        planDuration: planData.planDuration
+    };
+
+    console.log("Storing checkout data:", checkoutData);
+
+    try {
+      localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+      checkoutStore.setPlanData(checkoutData);
+
+      if ($user) {
+        await goto("/checkout");
+      } else {
+        await goto("/signin");
+      }
+    } catch (err) {
+      console.error("Error in handleClick:", err);
+    }
   }
 </script>
 
@@ -46,6 +85,7 @@
           </p>
           <button
             class="w-full mt-6 bg-[#F41A53]/80 text-white py-3 rounded-xl hover:bg-[#F41A53] transition-colors"
+            on:click={() => handleClick()}
           >
             Buy Now
           </button>

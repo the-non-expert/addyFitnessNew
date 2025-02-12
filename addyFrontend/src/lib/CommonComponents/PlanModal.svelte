@@ -11,8 +11,6 @@
   import { goto } from "$app/navigation";
   import { checkoutStore } from '$lib/stores/checkoutStore';
 
-
-
   export let isOpen;
   export let planData;
 
@@ -40,6 +38,7 @@
             ...planData,
             image: gsToHttp(planData.image)
         },
+        planType: 'training',
         selectedPlan: plan,
         selectedTrainingType,
         selectedTimeSlot

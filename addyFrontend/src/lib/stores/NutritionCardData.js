@@ -24,7 +24,7 @@ export const nutritionCardData = [
     },
     pricing: {
       original: "1199",
-      discounted: "999",
+      discounted: "1",
       duration: "2 Months",
       tag: " ",
     },

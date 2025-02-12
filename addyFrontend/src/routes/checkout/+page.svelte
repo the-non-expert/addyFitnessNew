@@ -94,25 +94,44 @@
         await updateUserProfile(profileData, $token);
 
         // Now proceed with payment
-        const orderData = {
-          title: `${$checkoutStore.planData.name} - ${$checkoutStore.selectedTrainingType}`,
-          amount: $checkoutStore.selectedPlan.price,
-          start_date: new Date(),
-          end_date: new Date(
-            Date.now() +
-              getDurationInDays($checkoutStore.selectedPlan.duration) *
-                24 *
-                60 *
-                60 *
-                1000
-          ),
-        };
+        let orderData;
+
+        if ($checkoutStore.planType === "training") {
+          orderData = {
+            title: `${$checkoutStore.planData.name} - ${$checkoutStore.selectedTrainingType}`,
+            amount: $checkoutStore.selectedPlan.price,
+            start_date: new Date(),
+            end_date: new Date(
+              Date.now() +
+                getDurationInDays($checkoutStore.selectedPlan.duration) *
+                  24 *
+                  60 *
+                  60 *
+                  1000
+            ),
+          };
+        } else {
+          // For nutrition plans
+          orderData = {
+            title: $checkoutStore.planData.name,
+            amount: parseInt($checkoutStore.pricing.discounted), // Make sure amount is an integer
+            start_date: new Date(),
+            end_date: new Date(
+              Date.now() +
+                getDurationInDays($checkoutStore.pricing.duration) *
+                  24 *
+                  60 *
+                  60 *
+                  1000
+            ),
+          };
+        }
 
         const orderDetails = await createOrder(orderData);
 
         initializeRazorpay(orderDetails, async (result) => {
           checkoutStore.clear();
-          goto("/dashboard");
+          goto("/my-orders");
         });
       } catch (err) {
         console.error("Profile update error:", err);
@@ -277,14 +296,26 @@
             <div class="flex justify-between">
               <h3 class="font-medium">{$checkoutStore.planData.name}</h3>
               <span class="font-medium"
-                >₹{$checkoutStore.selectedPlan.price}/-</span
+                >₹{$checkoutStore.planType === "training"
+                  ? $checkoutStore.selectedPlan.price
+                  : $checkoutStore.pricing.discounted}/-</span
               >
             </div>
 
             <div class="text-sm text-gray-600">
-              <p>Duration: {$checkoutStore.selectedPlan.duration}</p>
-              <p>Training Type: {$checkoutStore.selectedTrainingType}</p>
-              <p>Time Slot: {$checkoutStore.selectedTimeSlot}</p>
+              <p>
+                Duration: {$checkoutStore.planType === "training"
+                  ? $checkoutStore.selectedPlan.duration
+                  : $checkoutStore.pricing.duration}
+              </p>
+
+              {#if $checkoutStore.planType === "training"}
+                <p>Training Type: {$checkoutStore.selectedTrainingType}</p>
+                <p>Time Slot: {$checkoutStore.selectedTimeSlot}</p>
+              {:else}
+                <p>Nutritionist: {$checkoutStore.planData.coach}</p>
+                <p>Included: {$checkoutStore.planData.included}</p>
+              {/if}
             </div>
           </div>
 
@@ -292,15 +323,26 @@
 
           <!-- Price Breakdown -->
           <div class="space-y-2 text-sm">
+            {#if $checkoutStore.planType === "nutrition"}
+              <div class="flex justify-between">
+                <span class="text-gray-600">Original Price</span>
+                <span class="line-through"
+                  >₹{$checkoutStore.pricing.original}/-</span
+                >
+              </div>
+            {/if}
             <div class="flex justify-between">
               <span class="text-gray-600">Plan Price</span>
-              <span>₹{$checkoutStore.selectedPlan.price}/-</span>
+              <span
+                >₹{$checkoutStore.planType === "training"
+                  ? $checkoutStore.selectedPlan.price
+                  : $checkoutStore.pricing.discounted}/-</span
+              >
             </div>
+            <!-- GST calculation -->
             <div class="flex justify-between">
               <span class="text-gray-600">GST (18%)</span>
-              <span
-                >₹{Math.round($checkoutStore.selectedPlan.price * 0.18)}/-</span
-              >
+              <span>Included</span>
             </div>
           </div>
 
@@ -309,10 +351,15 @@
           <!-- Total -->
           <div class="flex justify-between font-bold text-lg">
             <span>Order Total:</span>
-            <span
-              >₹{$checkoutStore.selectedPlan.price +
-                Math.round($checkoutStore.selectedPlan.price * 0.18)}/-</span
-            >
+            <span>
+              ₹{(() => {
+                const basePrice =
+                  $checkoutStore.planType === "training"
+                    ? $checkoutStore.selectedPlan.price
+                    : $checkoutStore.pricing.discounted;
+                return basePrice;
+              })()}/-
+            </span>
           </div>
         {/if}
       </div>
