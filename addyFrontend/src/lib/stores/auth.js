@@ -17,6 +17,8 @@ export function clearAuth() {
   if (typeof localStorage !== "undefined") {
     localStorage.removeItem("token");
   }
+
+  localStorage.clear();
 }
 
 // Initialize from localStorage
