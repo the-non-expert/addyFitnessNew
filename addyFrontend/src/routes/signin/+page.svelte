@@ -63,7 +63,16 @@
 
       setAuth(response.access_token, null);
       user.setUser({ email });
-      goto("/");
+
+      const checkoutData = localStorage.getItem("checkoutData");
+
+      if (checkoutData) {
+        // If there's pending checkout data, redirect to checkout
+        goto("/checkout");
+      } else {
+        // Otherwise go to home page
+        goto("/");
+      }
     } catch (err) {
       error = err instanceof Error ? err.message : "Invalid email or password";
     } finally {
@@ -87,19 +96,19 @@
     class="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-8"
   >
     <!-- Logo Section -->
-    <div
-      class="mb-12 transform hover:scale-105 transition-transform duration-300"
+    <a href="/">
+      <div
+        class="mb-12 transform hover:scale-105 transition-transform duration-300"
+      >
+        <img src={gsToHttp(logo)} alt="AddyFitness Logo" class="h-16 md:h-40" />
+      </div></a
     >
-      <img src={gsToHttp(logo)} alt="AddyFitness Logo" class="h-16 md:h-40" />
-    </div>
 
     <!-- Main Card -->
     <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-8">
       <!-- Header -->
       <div class="space-y-2">
-        <h1 class="text-2xl font-semibold text-gray-900">
-          Welcome back
-        </h1>
+        <h1 class="text-2xl font-semibold text-gray-900">Welcome back</h1>
         <p class="text-gray-600">
           New to AddyFitness?
           <a

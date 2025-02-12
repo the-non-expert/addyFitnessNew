@@ -41,8 +41,8 @@
 
   // Password validation
   function validatePassword(value) {
-    if (!value){
-      return
+    if (!value) {
+      return;
     }
     if (value.length < 8) {
       passwordError = "Password must be at least 8 characters long";
@@ -92,7 +92,16 @@
 
       setAuth(loginResponse.access_token, null);
       user.setUser({ email });
-      goto("/");
+
+      const checkoutData = localStorage.getItem("checkoutData");
+
+      if (checkoutData) {
+        // If there's pending checkout data, redirect to checkout
+        goto("/checkout");
+      } else {
+        // Otherwise go to home page
+        goto("/");
+      }
     } catch (err) {
       error =
         err instanceof Error ? err.message : "An error occurred during signup";
@@ -117,11 +126,13 @@
     class="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-8"
   >
     <!-- Logo Section -->
-    <div
-      class="mb-12 transform hover:scale-105 transition-transform duration-300"
+    <a href="/">
+      <div
+        class="mb-12 transform hover:scale-105 transition-transform duration-300"
+      >
+        <img src={gsToHttp(logo)} alt="AddyFitness Logo" class="h-16 md:h-40" />
+      </div></a
     >
-      <img src={gsToHttp(logo)} alt="AddyFitness Logo" class="h-16 md:h-40" />
-    </div>
 
     <!-- Main Card -->
     <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-8">
@@ -191,7 +202,9 @@
                 placeholder="Password"
                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg
                      focus:bg-white focus:ring-2 focus:ring-[#F41A53] focus:border-[#F41A53]
-                     transition-all duration-200 {passwordError ? 'border-red-500' : ''}"
+                     transition-all duration-200 {passwordError
+                  ? 'border-red-500'
+                  : ''}"
                 bind:value={password}
               />
             {:else}
@@ -200,7 +213,9 @@
                 placeholder="Password"
                 class="outline-none w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg
                      focus:bg-white focus:ring-1 focus:ring-[#F41A53] focus:border-[#F41A53]
-                     transition-all duration-200 {passwordError ? 'border-red-500' : ''}"
+                     transition-all duration-200 {passwordError
+                  ? 'border-red-500'
+                  : ''}"
                 bind:value={password}
               />
             {/if}
