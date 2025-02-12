@@ -9,12 +9,13 @@
   import { onMount } from "svelte";
   import { user } from "$lib/stores/userStore.js";
   import { goto } from "$app/navigation";
+  import { checkoutStore } from '$lib/stores/checkoutStore';
+
 
 
   export let isOpen;
   export let planData;
 
-  console.log("planData", planData);
 
   const dispatch = createEventDispatcher();
   let isLoading = false;
@@ -28,10 +29,37 @@
     ctaButton = "Sign In";
   }
 
-  async function handleSignIn() {
-    handleClose();
-    window.location.href = '/signin';
-  }
+  // async function handleSignIn() {
+  //   handleClose();
+  //   window.location.href = '/signin';
+  // }
+
+  async function handleClick(plan) {
+    const checkoutData = {
+        planData: {
+            ...planData,
+            image: gsToHttp(planData.image)
+        },
+        selectedPlan: plan,
+        selectedTrainingType,
+        selectedTimeSlot
+    };
+
+    console.log('Storing checkout data:', checkoutData);
+    
+    try {
+        localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+        checkoutStore.setPlanData(checkoutData);
+        
+        if ($user) {
+            await goto("/checkout");
+        } else {
+            await goto('/signin');
+        }
+    } catch (err) {
+        console.error('Error in handleClick:', err);
+    }
+}
 
   function handleClose() {
     dispatch("close");
@@ -48,43 +76,43 @@
     await loadRazorpay();
   });
 
-  async function handlePayment(plan) {
-    try {
-      isLoading = true;
-      error = null;
+  // async function handlePayment(plan) {
+  //   try {
+  //     isLoading = true;
+  //     error = null;
 
-      // Create order data
-      const orderData = {
-        title: `${planData.name} - ${selectedTrainingType}`,
-        amount: plan.price,
-        start_date: new Date(), // You might want to calculate this based on selectedTimeSlot
-        end_date: new Date(Date.now() + getDurationInDays(plan.duration) * 24 * 60 * 60 * 1000)
-      };
+  //     // Create order data
+  //     const orderData = {
+  //       title: `${planData.name} - ${selectedTrainingType}`,
+  //       amount: plan.price,
+  //       start_date: new Date(), // You might want to calculate this based on selectedTimeSlot
+  //       end_date: new Date(Date.now() + getDurationInDays(plan.duration) * 24 * 60 * 60 * 1000)
+  //     };
 
-      console.log('Sending order data:', orderData);
-      console.log('Authorization token:', localStorage.getItem('token')); // Check token
+  //     console.log('Sending order data:', orderData);
+  //     console.log('Authorization token:', localStorage.getItem('token')); // Check token
 
-      // Create order on backend
-      const orderDetails = await createOrder(orderData);
+  //     // Create order on backend
+  //     const orderDetails = await createOrder(orderData);
 
-      console.log('Response:', orderDetails);
+  //     console.log('Response:', orderDetails);
       
-      // Initialize Razorpay with order details
-      initializeRazorpay(orderDetails, (result) => {
-        // Handle successful payment
-        dispatch('paymentSuccess', {
-          plan,
-          selectedTimeSlot,
-          selectedTrainingType
-        });
-      });
+  //     // Initialize Razorpay with order details
+  //     initializeRazorpay(orderDetails, (result) => {
+  //       // Handle successful payment
+  //       dispatch('paymentSuccess', {
+  //         plan,
+  //         selectedTimeSlot,
+  //         selectedTrainingType
+  //       });
+  //     });
 
-    } catch (err) {
-      error = err.message;
-    } finally {
-      isLoading = false;
-    }
-  }
+  //   } catch (err) {
+  //     error = err.message;
+  //   } finally {
+  //     isLoading = false;
+  //   }
+  // }
 
   function getDurationInDays(duration) {
     // Convert duration string to days
@@ -103,6 +131,8 @@
 </script>
 
 {#if isOpen}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     class="fixed inset-0 bg-black/90 overflow-hidden z-40"
     on:click={handleClose}
@@ -236,13 +266,7 @@
               <button
               class="w-full mt-4 bg-pink-400 text-white py-3 rounded-xl hover:bg-pink-600 transition-colors
                      disabled:bg-gray-400 disabled:cursor-not-allowed"
-                     on:click={() => {
-                      if ($user) {
-                        handlePayment(plan);
-                      } else {
-                        handleSignIn();
-                      }
-                    }}
+                     on:click={() => handleClick(plan)}
               disabled={isLoading}
             >
               {isLoading ? 'Processing...' : ctaButton}

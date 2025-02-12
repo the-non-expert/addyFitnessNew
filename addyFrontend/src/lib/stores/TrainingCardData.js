@@ -45,7 +45,7 @@ export const trainingCardData = [
   },
   {
     id: 2,
-    availability: false,
+    availability: true,
     name: "Yoga",
     coach: "Adnan Ali",
     duration: "60 mins",
