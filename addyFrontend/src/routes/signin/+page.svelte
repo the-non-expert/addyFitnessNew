@@ -6,170 +6,235 @@
   import { user } from "$lib/stores/userStore.js";
   import { goto } from "$app/navigation";
 
-  let logo = "gs://addyfitness-db121.appspot.com/addyFitnessMainLogo.png";
+  const logo = "gs://addyfitness-db121.appspot.com/LOGO RED.png";
 
-  let sectionImage = "gs://addyfitness-db121.appspot.com/whyChooseUs2.gif";
-
+  // Form state
   let showPassword = false;
-  let passwordInput = null;
-  let emailInput = null;
+  let email = "";
+  let password = "";
+  let isSubmitting = false;
   let error = null;
 
-  // Reactive statement to check if inputs are empty
-  $: isDisabled = !(emailInput && passwordInput);
+  // Validation states
+  let emailError = "";
+  let isValid = false;
 
   function togglePasswordVisibility() {
     showPassword = !showPassword;
-    // passwordInput.type = showPassword ? "text" : "password";
   }
 
-  async function loginSubmission() {
-    try {
-        const formData = new URLSearchParams({
-            username: emailInput,     // OAuth2 expects 'username'
-            password: passwordInput
-        });
-
-        const response = await post("/auth/login", formData, null, true);  // true for form data
-        console.log("Login response:", response);
-        
-        if (!response.access_token) {
-            throw new Error('Login failed: No access token received');
-        }
-
-        // Store token - notice it's access_token not token
-        setAuth(response.access_token, null);
-        
-        // Set user data
-        user.setUser({
-            email: emailInput,
-        });
-        
-        goto("/"); 
-    } catch (err) {
-        console.error(err);
-        error = err.message || "Invalid email or password";
+  // Email validation
+  function validateEmail(value) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!value) {
+      return false;
     }
-}
+    if (!emailRegex.test(value)) {
+      emailError = "Please enter a valid email address";
+      return false;
+    }
+    emailError = "";
+    return true;
+  }
+
+  // Validate form on input
+  $: {
+    const isEmailValid = validateEmail(email);
+    isValid = isEmailValid && password.length > 0;
+  }
+
+  async function handleSignin() {
+    if (!isValid || isSubmitting) return;
+
+    isSubmitting = true;
+    error = null;
+
+    try {
+      const formData = new URLSearchParams({
+        username: email,
+        password,
+      });
+
+      const response = await post("/auth/login", formData, null, true);
+
+      if (!response.access_token) {
+        throw new Error("Login failed");
+      }
+
+      setAuth(response.access_token, null);
+      user.setUser({ email });
+      goto("/");
+    } catch (err) {
+      error = err instanceof Error ? err.message : "Invalid email or password";
+    } finally {
+      isSubmitting = false;
+    }
+  }
 </script>
 
-<div class="w-full flex">
-  <div class="p-10 w-1/2">
-    <a href="/signin"><img src={gsToHttp(logo)} alt="" class="w-56" /></a>
+<div class="min-h-screen bg-gray-50">
+  <!-- Decorative elements -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute w-1/2 h-screen bg-gradient-to-br from-[#F41A53]/5 to-transparent"
+    ></div>
+    <div
+      class="absolute right-0 w-1/2 h-screen bg-gradient-to-bl from-[#F41A53]/5 to-transparent"
+    ></div>
+  </div>
 
-    <p
-      class="text-[#5E17EB] josefin-sans mt-10 text-center md:text-8xl text-2xl font-bold"
+  <div
+    class="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-8"
+  >
+    <!-- Logo Section -->
+    <div
+      class="mb-12 transform hover:scale-105 transition-transform duration-300"
     >
-      Hi there!
-    </p>
-    <p class="text-center raleway-font text-xl font-semibold">
-      Welcome to Addy Fitness - The Complete Health Solution
-    </p>
-
-    <!-- log in with google button  -->
-    <div class="w-full flex flex-col items-center mt-8">
-      <button
-        class="px-28 py-4 flex justify-center items-center gap-3 raleway-font border-2 rounded-xl cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-        on:click={() => {}}
-      >
-        <img src={googleIcon} alt="Google Icon" class="w-6 h-6" />
-        Log in with Google
-      </button>
+      <img src={gsToHttp(logo)} alt="AddyFitness Logo" class="h-16 md:h-40" />
     </div>
 
-    <!-- or seprator  -->
-    <div class="flex items-center m-5">
-      <div class="flex-grow border-t" />
-      <span class="mx-4 raleway-font">or</span>
-      <div class="flex-grow border-t" />
-    </div>
+    <!-- Main Card -->
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-8">
+      <!-- Header -->
+      <div class="space-y-2">
+        <h1 class="text-2xl font-semibold text-gray-900">
+          Welcome back
+        </h1>
+        <p class="text-gray-600">
+          New to AddyFitness?
+          <a
+            href="/signup"
+            class="text-[#F41A53] hover:text-[#F41A53]/80 font-medium transition-colors duration-200"
+          >
+            Create an account
+          </a>
+        </p>
+      </div>
 
-    <!-- Login Input Fields Section -->
-    <div class="w-full flex flex-col gap-4 justify-center items-center">
-      <!-- Username Input -->
+      <!-- Error Message -->
       {#if error}
-        <p class="text-red-500 text-center">{error}</p>
+        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+          <p class="text-sm text-red-700">{error}</p>
+        </div>
       {/if}
-      <input
-        type="email"
-        placeholder="Your Email"
-        class="w-10/12 p-3 border border-gray-600 rounded-xl focus:outline-none focus:border-blue-500"
-        bind:value={emailInput}
-      />
 
-      <!-- Password Input with Show Password Button -->
-      <div class="relative w-10/12">
-        {#if showPassword}
-          <input
-            type="text"
-            placeholder="Password"
-            class="w-full p-3 border border-gray-600 rounded-xl focus:outline-none focus:border-blue-500"
-            bind:value={passwordInput}
-          />
-        {:else}
-          <input
-            type="password"
-            placeholder="Password"
-            class="w-full p-3 border border-gray-600 rounded-xl focus:outline-none focus:border-blue-500"
-            bind:value={passwordInput}
-          />
-        {/if}
+      <!-- Form -->
+      <form class="space-y-6" on:submit|preventDefault={handleSignin}>
+        <!-- Email Input -->
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Email address
+          </label>
+          <div class="relative">
+            <input
+              type="email"
+              id="email"
+              bind:value={email}
+              class="outline-none w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg
+                     focus:bg-white focus:ring-1 focus:ring-[#F41A53] focus:border-[#F41A53]
+                     transition-all duration-200 {emailError
+                ? 'border-red-500'
+                : ''}"
+              placeholder="you@example.com"
+            />
+            {#if emailError}
+              <p class="mt-1 text-sm text-red-600">{emailError}</p>
+            {/if}
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Password
+          </label>
+          <div class="relative">
+            {#if showPassword}
+              <input
+                type="text"
+                id="password"
+                placeholder="Password"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg
+                     focus:bg-white focus:ring-2 focus:ring-[#F41A53] focus:border-[#F41A53]
+                     transition-all duration-200"
+                bind:value={password}
+              />
+            {:else}
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                class="outline-none w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg
+                     focus:bg-white focus:ring-1 focus:ring-[#F41A53] focus:border-[#F41A53]
+                     transition-all duration-200"
+                bind:value={password}
+              />
+            {/if}
+            <button
+              type="button"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500
+                     hover:text-[#F41A53] transition-colors duration-200"
+              on:click={togglePasswordVisibility}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <div class="flex justify-end mt-1">
+            <a
+              href="/forgot-password"
+              class="text-sm text-[#F41A53] hover:text-[#F41A53]/80 transition-colors duration-200"
+            >
+              Forgot password?
+            </a>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          disabled={!isValid || isSubmitting}
+          class="w-full py-3 px-4 bg-[#F41A53] text-white font-medium rounded-lg
+                 hover:bg-[#F41A53]/90 focus:ring-4 focus:ring-[#F41A53]/30
+                 disabled:opacity-50 disabled:cursor-not-allowed
+                 transition-colors duration-200"
+        >
+          {isSubmitting ? "Signing in..." : "Sign in"}
+        </button>
+
+        <!-- Divider -->
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-white text-gray-500">Or continue with</span>
+          </div>
+        </div>
+
+        <!-- Google Sign In -->
         <button
           type="button"
-          class="absolute inset-y-0 right-0 px-3 text-sm font-semibold hover:text-[#5E17EB]"
-          on:click={togglePasswordVisibility}
+          class="w-full flex items-center justify-center gap-3 px-4 py-3
+                 bg-white border border-gray-200 rounded-lg text-gray-700 font-medium
+                 hover:bg-gray-50 focus:ring-4 focus:ring-gray-100
+                 transition-colors duration-200"
         >
-          {showPassword ? "Hide" : "Show"}
+          <img src={googleIcon} alt="Google" class="w-5 h-5" />
+          Sign in with Google
         </button>
-      </div>
-
-      <!-- Forgot Password Text -->
-      <div class="">
-        <a href="/forgot-password" class="text-blue-600 hover:underline">
-          Forgot Password?
-        </a>
-      </div>
-
-      <button
-        class="w-10/12 p-3 font-bold bg-black text-white rounded-3xl cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-        on:click|preventDefault={loginSubmission}
-        disabled={isDisabled}
-      >
-        Log In
-      </button>
+      </form>
     </div>
-
-    <div class="text-center mt-9">
-      Don't have an account?
-
-      <a href="/signup">
-        <span
-          class="font-semibold cursor-pointer hover:underline hover:underline-offset-2"
-          >Sign up?</span
-        ></a
-      >
-    </div>
-  </div>
-  <div class="w-1/2 h-screen">
-    <img src={gsToHttp(sectionImage)} alt="" class="h-full object-cover" />
   </div>
 </div>
 
 <style>
-  .baskervville-sc-regular {
-    font-family: "Baskervville SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  .raleway-font {
-    font-family: "Raleway", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-  }
-
-  .josefin-sans {
-    font-family: "Josefin Sans", sans-serif;
-    font-optical-sizing: auto;
+  :global(body) {
+    background-color: #f9fafb;
   }
 </style>
