@@ -110,9 +110,16 @@
         <ul class="space-y-2">
           <li>
             <a
-              href="/signup"
+              href="/signin"
               class="text-gray-400 hover:text-white transition-colors"
-              >Sign Up</a
+              >Sign In</a
+            >
+          </li>
+          <li>
+            <a
+              href="/careers"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Careers</a
             >
           </li>
           <li>
@@ -127,20 +134,6 @@
               href="/contact"
               class="text-gray-400 hover:text-white transition-colors"
               >Contact us</a
-            >
-          </li>
-          <li>
-            <a
-              href="/contact"
-              class="text-gray-400 hover:text-white transition-colors"
-              >Join Us as a Trainer</a
-            >
-          </li>
-          <li>
-            <a
-              href="/contact"
-              class="text-gray-400 hover:text-white transition-colors"
-              >Join Us as a Doctor</a
             >
           </li>
         </ul>
