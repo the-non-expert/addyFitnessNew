@@ -27,14 +27,7 @@
         </h2>
 
         <div class="flex flex-wrap gap-4">
-          <a href="#">
-            <button
-              class="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors"
-            >
-              Connect to Us
-            </button>
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/9861208460" target="_blank" rel="noopener noreferrer">
             <button
               class="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-[#28D144] hover:text-black transition-colors flex items-center gap-2"
             >
