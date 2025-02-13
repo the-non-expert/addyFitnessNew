@@ -3,6 +3,11 @@
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
   let homeHeroImage = "gs://addyfitness-db121.appspot.com/homeheroImage.png";
   let homeHeroVid = "gs://addyfitness-db121.appspot.com/homePageNewVideo.mp4";
+  let isVideoLoaded = false;
+
+  function handleVideoLoad() {
+    isVideoLoaded = true;
+  }
 </script>
 
 <div class="relative w-full">
@@ -69,12 +74,21 @@
         <!-- Illustration -->
         <div class="items-center justify-center">
           <div class="relative mt-20 mx-auto max-w-lg w-full aspect-video">
-            <iframe
+            {#if !isVideoLoaded}
+              <div
+                class="absolute top-0 left-0 w-full h-full rounded-xl bg-gray-100 animate-pulse"
+              ></div>
+            {/if}
+            <video
               src={gsToHttp(homeHeroVid)}
-              title="Addy Fitness Video"
-              class="absolute top-0 left-0 w-full h-full rounded-xl"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            ></iframe>
+              class="absolute top-0 left-0 w-full h-full rounded-xl object-cover"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              on:loadeddata={handleVideoLoad}
+            ></video>
           </div>
         </div>
       </div>
