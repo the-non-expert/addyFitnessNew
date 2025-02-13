@@ -48,7 +48,7 @@
   </p>
 </a>
 
-<!-- {#if showFooter}
+{#if showFooter}
   <Footer />
-{/if} -->
+{/if}
 
