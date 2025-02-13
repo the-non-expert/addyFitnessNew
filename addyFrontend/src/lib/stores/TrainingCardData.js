@@ -222,7 +222,7 @@ export const trainingCardData = [
   {
     id: 6,
     availability: true,
-    name: "Old-Age Workout",
+    name: "Senior Workout",
     coach: "Adnan Ali",
     duration: "60 mins",
     sessions: "5",
