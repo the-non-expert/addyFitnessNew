@@ -52,7 +52,7 @@
     <!-- Main Header -->
     <div class="text-center mb-16">
       <h1 class="text-4xl font-bold mb-4 raleway-font text-slate-900">
-        Fitness Calculators
+        BMR & BMI Calculator | AddyFitness
       </h1>
       <p class="text-gray-600 text-lg max-w-2xl mx-auto">
         Understanding your body's metrics is the first step towards achieving

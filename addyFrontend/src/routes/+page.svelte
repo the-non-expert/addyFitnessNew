@@ -10,7 +10,7 @@
 </svelte:head>
 <div>
   <HomePageHero />
-  <HowWeHelpYou />
+  <!-- <HowWeHelpYou /> -->
   <BmrBmiCalculator />
   <JoinCommunity />
 </div>
