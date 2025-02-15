@@ -34,7 +34,7 @@ export const nutritionCardData = [
     name: "Weight Gain",
     coach: "Adnan Ali",
     included: "2 Months Plan | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/weightGain.gif",
+    image: "gs://addyfitness-db121.appspot.com/weight gain.gif",
     description:
       "Register here to sculpt your muscles and achieve your desired physique. Join us today and unleash your potential for a stronger, fitter you.",
     planDuration: {
@@ -64,7 +64,7 @@ export const nutritionCardData = [
     name: "Diabetes",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/diabetes.gif",
+    image: "gs://addyfitness-db121.appspot.com/diabetes-1.gif",
     description:
       "Take control of your health and privacy. Register here to manage and monitor your blood sugar levels independently.",
     planDuration: {
@@ -94,7 +94,7 @@ export const nutritionCardData = [
     name: "Thyroid",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/thyroid.gif",
+    image: "gs://addyfitness-db121.appspot.com/thyroid_2.gif",
     description:
       "Take charge of your health and privacy. Register now to manage and monitor your thyroid levels independently.",
     planDuration: {
@@ -214,7 +214,7 @@ export const nutritionCardData = [
     name: "Blood Pressure",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/bloodPressure.gif",
+    image: "gs://addyfitness-db121.appspot.com/blood-pressure-500x288.gif",
     description:
       "Take control of your blood pressure with our specialized nutrition and lifestyle guidance.",
     planDuration: {
@@ -244,7 +244,7 @@ export const nutritionCardData = [
     name: "Renal Function(Kidney)",
     coach: "Adnan Ali",
     included: "As Per Subscription | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/kidney.gif",
+    image: "gs://addyfitness-db121.appspot.com/Kidney 1.gif",
     description:
       "Specialized nutrition plan for optimal kidney health and function.",
     planDuration: {
@@ -274,7 +274,7 @@ export const nutritionCardData = [
     name: "Child Nutrition",
     coach: "Adnan Ali",
     included: "Yearly Plan | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/ChildNutrition.gif",
+    image: "gs://addyfitness-db121.appspot.com/child nutrition 2.gif",
     description:
       "Comprehensive nutrition planning for your child's growth and development.",
     planDuration: {
@@ -304,7 +304,7 @@ export const nutritionCardData = [
     name: "Post Pregnancy",
     coach: "Adnan Ali",
     included: "1 Year Post | Workout Plan also Available",
-    image: "gs://addyfitness-db121.appspot.com/pregnancy.gif",
+    image: "gs://addyfitness-db121.appspot.com/post pregnancy.gif",
     description:
       "Support your postpartum recovery with specialized nutrition guidance.",
     planDuration: {
