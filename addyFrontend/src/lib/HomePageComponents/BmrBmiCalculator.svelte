@@ -160,26 +160,27 @@
             <ul class="space-y-2">
               <li>
                 <a
-                  href="/blog/understanding-bmr"
+                  href="/blogs/importance-physical-activity-india"
+                  class="text-[#F41952] hover:text-[#F41952]/80"
+                >
+                  The Importance of Physical Activity
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/blogs/understanding-bmr-fitness-journey"
                   class="text-[#F41952] hover:text-[#F41952]/80"
                 >
                   Understanding Your BMR: A Complete Guide
                 </a>
               </li>
+
               <li>
                 <a
-                  href="/blog/bmi-myths"
+                  href="/blogs/probiotics-prebiotics-daily-life"
                   class="text-[#F41952] hover:text-[#F41952]/80"
                 >
-                  Common BMI Myths Debunked
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/blog/nutrition-basics"
-                  class="text-[#F41952] hover:text-[#F41952]/80"
-                >
-                  Nutrition Basics for Beginners
+                  The Need for Probiotics and Prebiotics in Daily Life
                 </a>
               </li>
             </ul>
