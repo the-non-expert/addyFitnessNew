@@ -31,13 +31,13 @@
       id: 5,
       name: "Endocronologist",
       description: "Get your diabetes and thyroid treatment at home",
-      image: "gs://addyfitness-db121.appspot.com/thyroid.gif",
+      image: "gs://addyfitness-db121.appspot.com/thyroid 3.gif",
     },
     {
       id: 6,
       name: "Psychologist",
       description: "Get a friend to help you",
-      image: "gs://addyfitness-db121.appspot.com/psychology.gif",
+      image: "gs://addyfitness-db121.appspot.com/counsellor 1.gif",
     },
   ];
 </script>
