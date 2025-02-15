@@ -131,7 +131,7 @@
 
         initializeRazorpay(orderDetails, async (result) => {
           checkoutStore.clear();
-          goto("/my-orders");
+          goto("/");
         });
       } catch (err) {
         console.error("Profile update error:", err);
