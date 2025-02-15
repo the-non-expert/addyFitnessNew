@@ -13,7 +13,7 @@
     { id: 3, name: "Healthcare", redirectUrl: "/healthcare" },
     { id: 4, name: "Management", redirectUrl: "/management" },
     { id: 5, name: "Careers", redirectUrl: "/careers" },
-    { id: 6, name: "Blogs", redirectUrl: "/" },
+    { id: 6, name: "Blogs", redirectUrl: "/blogs" },
     { id: 7, name: "About", redirectUrl: "/about" },
     { id: 8, name: "Contact", redirectUrl: "/contact" },
   ];
