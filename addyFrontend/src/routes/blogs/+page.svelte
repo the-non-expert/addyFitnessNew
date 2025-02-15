@@ -1,6 +1,6 @@
 <!-- src/routes/blog/+page.svelte -->
 <script>
-    import BlogCard from '$lib/components/BlogCard.svelte';
+    import BlogCard from '$lib/Components/BlogCard.svelte';
     import { blogs } from '$lib/stores/BlogData';
 </script>
 
