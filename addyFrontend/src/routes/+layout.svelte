@@ -14,19 +14,19 @@
   $: showFooter = !noHeaderFooterRoutes.includes(activeRoute);
 </script>
 
-<CountdownTimer/>
+<!-- <CountdownTimer/> -->
 
-<!-- {#if showHeader}
+{#if showHeader}
   <Header />
   <MobileHeader />
-{/if} -->
+{/if}
 
-<!-- <slot /> -->
+<slot />
 <Toaster />
 
 <!-- Floating WhatsApp Button -->
 <a
-  href="#"
+  href="https://wa.me/9861208460"
   target="_blank"
   rel="noopener noreferrer"
   class="group fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 w-14 md:hover:w-3/12 h-14 rounded-full hover:rounded-full flex items-center shadow-lg transition-all duration-300 z-50 overflow-hidden"
@@ -48,7 +48,7 @@
   </p>
 </a>
 
-<!-- {#if showFooter}
+{#if showFooter}
   <Footer />
-{/if} -->
+{/if}
 
