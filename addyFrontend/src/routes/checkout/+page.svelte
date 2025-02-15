@@ -157,7 +157,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Personal Information -->
           <div class="space-y-2">
-            <label class="text-sm font-medium text-gray-600">Full Name</label>
+            <label class="text-sm font-medium text-gray-600">Full Name<span class="text-red-500">*</span></label>
             <input
               type="text"
               bind:value={$profileStore.full_name}
@@ -170,7 +170,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-gray-600">Phone</label>
+            <label class="text-sm font-medium text-gray-600">Phone<span class="text-red-500">*</span></label>
             <input
               type="tel"
               bind:value={$profileStore.phone}
@@ -183,7 +183,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-gray-600">Height (cm)</label>
+            <label class="text-sm font-medium text-gray-600">Height (cm) <span class="text-red-500">*</span></label>
             <input
               type="number"
               bind:value={$profileStore.height}
@@ -196,7 +196,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-gray-600">Weight (kg)</label>
+            <label class="text-sm font-medium text-gray-600">Weight (kg) <span class="text-red-500">*</span></label>
             <input
               type="number"
               bind:value={$profileStore.weight}
@@ -209,7 +209,7 @@
           </div>
 
           <div class="space-y-2 md:col-span-2">
-            <label class="text-sm font-medium text-gray-600">Address</label>
+            <label class="text-sm font-medium text-gray-600">Address <span class="text-red-500">*</span></label>
             <textarea
               bind:value={$profileStore.address}
               on:input={(e) =>
@@ -259,23 +259,6 @@
 
       <!-- Summary section -->
       <div class="bg-white p-6 rounded-lg shadow h-fit">
-        <!-- Place Order Section -->
-        <button
-          class="w-full bg-pink-500 text-white py-3 rounded-lg mb-4 hover:bg-pink-600 transition-all duration-300 disabled:bg-gray-400"
-          on:click={handlePlaceOrder}
-          disabled={isLoading}
-        >
-          Place your order
-        </button>
-        <p class="text-xs text-gray-500 text-center mb-6">
-          By placing your order, you agree to AddyFitness's
-          <a href="/terms" class="text-blue-600 hover:underline"
-            >Terms of Service</a
-          >
-        </p>
-
-        <hr class="mb-6" />
-
         <!-- Summary Section -->
         <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
 
@@ -339,6 +322,13 @@
                   : $checkoutStore.pricing.discounted}/-</span
               >
             </div>
+            <!-- Discount Calculation -->
+            <div class="flex justify-between">
+              <span class="text-gray-600">Discount (15%)</span>
+              <span class="text-green-600">
+                -₹{Math.round($checkoutStore.pricing.original * 0.15)}/-
+              </span>
+            </div>
             <!-- GST calculation -->
             <div class="flex justify-between">
               <span class="text-gray-600">GST (18%)</span>
@@ -353,15 +343,36 @@
             <span>Order Total:</span>
             <span>
               ₹{(() => {
-                const basePrice =
-                  $checkoutStore.planType === "training"
-                    ? $checkoutStore.selectedPlan.price
-                    : $checkoutStore.pricing.discounted;
-                return basePrice;
+                if ($checkoutStore.planType === "nutrition") {
+                  // Apply 15% discount for nutrition plans
+                  const originalPrice = $checkoutStore.pricing.discounted;
+                  const discountAmount = Math.round(originalPrice * 0.15);
+                  return originalPrice - discountAmount;
+                } else {
+                  // For training plans, use the selected plan price
+                  return $checkoutStore.selectedPlan.price;
+                }
               })()}/-
             </span>
           </div>
         {/if}
+
+        <hr class="mb-6" />
+
+        <!-- Place Order Section -->
+        <button
+          class="w-full bg-[#F41A53]/80 text-white py-3 rounded-lg mb-4 hover:bg-[#F41A53] transition-all duration-300 disabled:bg-gray-400"
+          on:click={handlePlaceOrder}
+          disabled={isLoading}
+        >
+          Place your order
+        </button>
+        <p class="text-xs text-gray-500 text-center mb-6">
+          By placing your order, you agree to AddyFitness's
+          <a href="/terms" class="text-blue-600 hover:underline"
+            >Terms of Service</a
+          >
+        </p>
       </div>
     </div>
   </div>

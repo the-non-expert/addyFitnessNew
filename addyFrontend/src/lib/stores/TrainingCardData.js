@@ -28,17 +28,17 @@ export const trainingCardData = [
     pricing: [
       {
         duration: "1 Month",
-        price: 1,
+        price: 1399,
         tag: null,
       },
       {
         duration: "3 Months",
-        price: 1,
+        price: 3799,
         tag: "Best Offer Available*",
       },
       {
         duration: "6 Months",
-        price: 1,
+        price: 6899,
         tag: null,
       },
     ],
@@ -71,18 +71,18 @@ export const trainingCardData = [
     },
     pricing: [
       {
-        duration: "1 Months",
-        price: 1,
+        duration: "1 Month",
+        price: 1399,
         tag: null,
       },
       {
         duration: "3 Months",
-        price: 1,
+        price: 3799,
         tag: "Best Offer Available*",
       },
       {
         duration: "6 Months",
-        price: 1,
+        price: 6899,
         tag: null,
       },
     ],
@@ -115,20 +115,11 @@ export const trainingCardData = [
     },
     pricing: [
       {
-        duration: "1 Months",
-        price: 1,
+        duration: "1 Month",
+        price: 1099,
         tag: null,
       },
-      {
-        duration: "3 Months",
-        price: 1,
-        tag: "Best Offer Available*",
-      },
-      {
-        duration: "6 Months",
-        price: 1,
-        tag: null,
-      },
+     
     ],
   },
   {
@@ -159,7 +150,7 @@ export const trainingCardData = [
     },
     pricing: [
       {
-        duration: "1 Months",
+        duration: "1 Month",
         price: 1,
         tag: null,
       },
@@ -203,7 +194,7 @@ export const trainingCardData = [
     },
     pricing: [
       {
-        duration: "1 Months",
+        duration: "1 Month",
         price: 1,
         tag: null,
       },
@@ -247,18 +238,8 @@ export const trainingCardData = [
     },
     pricing: [
       {
-        duration: "1 Months",
-        price: 1,
-        tag: null,
-      },
-      {
-        duration: "3 Months",
-        price: 1,
-        tag: "Best Offer Available*",
-      },
-      {
-        duration: "6 Months",
-        price: 1,
+        duration: "1 Month",
+        price: 799,
         tag: null,
       },
     ],
