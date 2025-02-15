@@ -217,17 +217,17 @@
         </button>
 
         <!-- Divider -->
-        <div class="relative">
+        <!-- <div class="relative">
           <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-gray-200"></div>
           </div>
           <div class="relative flex justify-center text-sm">
             <span class="px-4 bg-white text-gray-500">Or continue with</span>
           </div>
-        </div>
+        </div> -->
 
         <!-- Google Sign In -->
-        <button
+        <!-- <button
           type="button"
           class="w-full flex items-center justify-center gap-3 px-4 py-3
                  bg-white border border-gray-200 rounded-lg text-gray-700 font-medium
@@ -236,7 +236,7 @@
         >
           <img src={googleIcon} alt="Google" class="w-5 h-5" />
           Sign in with Google
-        </button>
+        </button> -->
       </form>
     </div>
   </div>
