@@ -1,14 +1,20 @@
 <script>
   import { gsToHttp } from "$lib/CommonComponents/utils.js";
+  import { healthcareStore } from "$lib/stores/healthstore";
+  import { goto } from "$app/navigation";
+
 
   export let individualCardData;
+
+  const handleBooking = () => {
+    healthcareStore.setServiceData(individualCardData);
+    goto("/checkout/healthcare");
+  };
 
   console.log();
 </script>
 
-<div
-  class="border rounded-xl p-4 flex flex-col gap-5 shadow-xl"
->
+<div class="border rounded-xl p-4 flex flex-col gap-5 shadow-xl">
   <div class="">
     <img
       src={gsToHttp(individualCardData.image)}
@@ -27,6 +33,7 @@
     </p>
   </div>
   <button
+    on:click={handleBooking}
     class="py-2 rounded-xl border border-black bg-black text-white hover:bg-white hover:text-[#F41952]"
     >Book an Appointment</button
   >

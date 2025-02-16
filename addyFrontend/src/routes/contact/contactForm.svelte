@@ -68,7 +68,7 @@
       <input
         type="text"
         bind:value={$formData.email}
-        placeholder="info@addyfitness.com"
+        placeholder="help@addyfitness.com"
         class="rounded-lg p-2 w-full text-black placeholder:text-sm outline-none border border-black"
       />
     </div>

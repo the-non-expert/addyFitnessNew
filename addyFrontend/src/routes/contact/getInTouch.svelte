@@ -40,7 +40,7 @@
     <img src={emailIcon} alt="emailIcon" class="w-4" />
     <p class="font-bold text-[#F41952] raleway-font">Chat with Us!</p>
   </div>
-  <p class="montserrat-regular">info@addyfitness.com</p>
+  <p class="montserrat-regular">help@addyfitness.com</p>
 
   <div class="flex gap-2">
     <img src={phoneIcon} alt="phoneIcon" class="w-4" />

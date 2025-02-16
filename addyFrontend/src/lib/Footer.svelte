@@ -66,7 +66,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          info@addyfitness.com
+          help@addyfitness.com
         </a>
       </div>
 
