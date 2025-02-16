@@ -323,12 +323,14 @@
               >
             </div>
             <!-- Discount Calculation -->
+            {#if $checkoutStore.planType === "nutrition"}
             <div class="flex justify-between">
               <span class="text-gray-600">Discount (15%)</span>
               <span class="text-green-600">
                 -₹{Math.round($checkoutStore.pricing.original * 0.15)}/-
               </span>
             </div>
+            {/if}
             <!-- GST calculation -->
             <div class="flex justify-between">
               <span class="text-gray-600">GST (18%)</span>
