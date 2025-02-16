@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { healthcareStore } from "$lib/stores/healthStore";
+  import { healthcareStore } from "$lib/stores/healthstore";
   import { profileStore } from "$lib/stores/profileStore";
   import { loadRazorpay, initializeRazorpay } from "$lib/utils/paymentUtils";
   import { createOrder } from "$lib/services/paymentService";
