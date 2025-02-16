@@ -25,7 +25,7 @@
       id: 4,
       name: "Gynaecologist",
       description: "Consult gynic related issues confidentially",
-      image: "gs://addyfitness-db121.appspot.com/pregnancy.gif",
+      image: "gs://addyfitness-db121.appspot.com/gynocologist 1.gif",
     },
     {
       id: 5,
@@ -35,7 +35,7 @@
     },
     {
       id: 6,
-      name: "Psychologist",
+      name: "Mental Health",
       description: "Get a friend to help you",
       image: "gs://addyfitness-db121.appspot.com/counsellor 1.gif",
     },
