@@ -72,49 +72,71 @@
       isLoading = true;
       error = null;
 
-      if (!selectedDate || !selectedTime) {
-        error = "Please select both appointment date and time";
-        return;
-      }
-
-      // First create the appointment
-      const appointmentData = {
-        service_name: $healthcareStore.serviceData.name,
-        appointment_date: selectedDate,
-        appointment_time: selectedTime,
-        full_name: $profileStore.full_name,
-        phone: $profileStore.phone,
-        address: $profileStore.address
-      };
-
-      // Save appointment first
+      // First update the user profile using the existing service
       try {
-        const appointment = await createAppointment(appointmentData);
-        
-        // Then create the order
-        const appointmentDateTime = new Date(`${selectedDate} ${selectedTime}`);
-        const appointmentEndDateTime = new Date(appointmentDateTime);
-        appointmentEndDateTime.setHours(appointmentEndDateTime.getHours() + 1);
-
-        const orderData = {
-          title: `${$healthcareStore.serviceData.name} Consultation`,
-          amount: parseFloat($healthcareStore.serviceData.price),
-          start_date: appointmentDateTime,
-          end_date: appointmentEndDateTime,
-          appointment_id: appointment.id  // Link order to appointment
+        const profileData = {
+          ...$profileStore,
+          full_name: $profileStore.full_name || null,
+          phone: $profileStore.phone || null,
+          address: $profileStore.address || null,
+          height: $profileStore.height
+            ? parseFloat($profileStore.height)
+            : null,
+          weight: $profileStore.weight
+            ? parseFloat($profileStore.weight)
+            : null,
+          medical_conditions: $profileStore.medical_conditions || null,
+          dietary_restrictions: $profileStore.dietary_restrictions || null,
         };
+
+        console.log("Sending profile data:", profileData);
+
+        await updateUserProfile(profileData, $token);
+
+        // Now proceed with payment
+        let orderData;
+
+        if ($checkoutStore.planType === "training") {
+          orderData = {
+            title: `${$checkoutStore.planData.name} - ${$checkoutStore.selectedTrainingType}`,
+            amount: $checkoutStore.selectedPlan.price,
+            start_date: new Date(),
+            end_date: new Date(
+              Date.now() +
+                getDurationInDays($checkoutStore.selectedPlan.duration) *
+                  24 *
+                  60 *
+                  60 *
+                  1000
+            ),
+          };
+        } else {
+          // For nutrition plans
+          orderData = {
+            title: $checkoutStore.planData.name,
+            amount: parseInt($checkoutStore.pricing.discounted), // Make sure amount is an integer
+            start_date: new Date(),
+            end_date: new Date(
+              Date.now() +
+                getDurationInDays($checkoutStore.pricing.duration) *
+                  24 *
+                  60 *
+                  60 *
+                  1000
+            ),
+          };
+        }
 
         const orderDetails = await createOrder(orderData);
 
         initializeRazorpay(orderDetails, async (result) => {
-          // Update appointment with order ID after successful payment
-          await updateAppointment(appointment.id, { order_id: result.razorpay_order_id });
-          healthcareStore.clear();
-          goto("/my-appointments");
+          checkoutStore.clear();
+          goto("/my-orders");
         });
       } catch (err) {
-        error = "Failed to create appointment. Please try again.";
-        console.error(err);
+        console.error("Profile update error:", err);
+        error = "Failed to update profile information. Please try again.";
+        return;
       }
     } catch (err) {
       console.error("Payment error:", err);
@@ -122,7 +144,7 @@
     } finally {
       isLoading = false;
     }
-}
+  }
 </script>
 
 {#if mounted && $checkoutStore?.planData}
@@ -161,7 +183,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-gray-600">Height (cm) <span class="text-red-500">*</span></label>
+            <label class="text-sm font-medium text-gray-600">Height (cm)<span class="text-red-500">*</span></label>
             <input
               type="number"
               bind:value={$profileStore.height}
