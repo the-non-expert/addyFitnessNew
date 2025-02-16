@@ -1,6 +1,6 @@
 <!-- src/routes/my-orders/+page.svelte -->
 <script>
-  import OrderCard from '$lib/components/OrderCard.svelte';
+  import OrderCard from '$lib/Components/OrderCard.svelte';
   import { fade, fly } from 'svelte/transition';
   
   export let data;
