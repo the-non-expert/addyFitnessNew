@@ -7,6 +7,14 @@
   import { Toaster } from "svelte-french-toast";
   import CountdownTimer from "../lib/CountdownTimer.svelte";
 
+  import { inject } from "@vercel/analytics";
+
+  import { browser } from "$app/environment";
+
+  // Only inject analytics in the browser
+  if (browser) {
+    inject();
+  }
   $: activeRoute = $page.url.pathname;
 
   const noHeaderFooterRoutes = ["/signin", "/signup"];
@@ -51,4 +59,3 @@
 {#if showFooter}
   <Footer />
 {/if}
-
