@@ -114,7 +114,7 @@
           // For nutrition plans
           orderData = {
             title: $checkoutStore.planData.name,
-            amount: parseInt($checkoutStore.pricing.discounted), // Make sure amount is an integer
+            amount: parseInt($checkoutStore.pricing.discounted - ($checkoutStore.pricing.discounted * 0.15)), // Make sure amount is an integer
             start_date: new Date(),
             end_date: new Date(
               Date.now() +
@@ -327,7 +327,7 @@
             <div class="flex justify-between">
               <span class="text-gray-600">Discount (15%)</span>
               <span class="text-green-600">
-                -₹{Math.round($checkoutStore.pricing.original * 0.15)}/-
+                -₹{Math.round($checkoutStore.pricing.discounted * 0.15)}/-
               </span>
             </div>
             {/if}
