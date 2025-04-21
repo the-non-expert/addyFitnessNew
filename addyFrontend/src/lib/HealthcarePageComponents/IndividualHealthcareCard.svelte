@@ -7,14 +7,44 @@
   export let individualCardData;
 
   const handleBooking = () => {
-    healthcareStore.setServiceData(individualCardData);
-    goto("/checkout/healthcare");
-  };
-
-  console.log();
+        healthcareStore.setServiceData(individualCardData);
+        
+        // If emergency, go straight to checkout
+        if (individualCardData.name.toLowerCase() === 'emergency') {
+          healthcareStore.setSelectedDoctor(doctor);
+            goto("/checkout/healthcare");
+        } else {
+            // Convert service name to URL-friendly slug
+            const serviceSlug = individualCardData.name
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w-]+/g, '');
+            
+            goto(`/healthcare/${serviceSlug}/doctors`);
+        }
+    };
 </script>
 
-<div class="border rounded-xl p-4 flex flex-col gap-5 shadow-xl">
+<div class="border relative rounded-xl p-4 flex flex-col gap-5 shadow-xl">
+  {#if !individualCardData.availability}
+    <div
+      class="absolute inset-0 backdrop-blur-[1px] bg-black/40 rounded-xl flex items-center justify-center transition-all duration-300"
+    >
+      <div class="text-center">
+        <p
+          class="text-white/90 text-4xl font-bold raleway-font tracking-widest"
+        >
+          Coming
+        </p>
+        <p
+          class="text-white/80 text-lg font-bold raleway-font tracking-[0.4em] uppercase mt-1"
+        >
+          Soon
+        </p>
+      </div>
+    </div>
+  {/if}
+  
   <div class="">
     <img
       src={gsToHttp(individualCardData.image)}

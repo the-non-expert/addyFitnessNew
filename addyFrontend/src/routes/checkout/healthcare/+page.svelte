@@ -13,6 +13,8 @@
     updateAppointment,
   } from "$lib/services/appointment.js";
 
+  console.log($healthcareStore.selectedDoctor)
+
   let mounted = false;
   let isLoading = true;
   let error = null;
@@ -239,11 +241,17 @@
           <!-- Service Details -->
           <div class="space-y-3 mb-6">
             <div class="flex justify-between">
-              <h3 class="font-medium">{$healthcareStore.serviceData.name}</h3>
+              <span class="font-bold text-xl"
+                >{$healthcareStore.selectedDoctor.name}</span
+              >
               <span class="font-medium"
                 >₹{$healthcareStore.serviceData.price}/-</span
               >
             </div>
+            <span class="font-medium">{$healthcareStore.selectedDoctor.specialization}</span>
+
+
+            
 
             <div class="text-sm text-gray-600">
               <p>Service: {$healthcareStore.serviceData.description}</p>
