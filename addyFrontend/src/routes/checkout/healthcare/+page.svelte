@@ -91,6 +91,7 @@
         service_name: $healthcareStore.serviceData.name,
         appointment_date: selectedDate,
         appointment_time: selectedTime,
+        doctor: $healthcareStore.selectedDoctor.name,
         full_name: formData.full_name,
         phone: formData.phone,
         address: formData.address,

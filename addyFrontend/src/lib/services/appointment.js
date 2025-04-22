@@ -3,7 +3,6 @@ import { post, put } from '../api';
 
 export async function createAppointment(appointmentData, token) {  // Add token parameter
     try {
-        console.log('Sending appointment data:', appointmentData); // Debug log
         const response = await post('/appointments', appointmentData, token);  // Pass token
         return response;
     } catch (error) {

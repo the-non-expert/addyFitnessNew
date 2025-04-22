@@ -33,7 +33,7 @@ export const healthcareServices = {
         availability: true,
         description: "Consult about any problem",
         image: "gs://addyfitness-db121.appspot.com/generalPhysician.gif",
-        price: "699",
+        price: "1",
         consultationType: "Video Consultation",
         duration: "45 minutes",
         availableHours: "9 AM - 9 PM",
