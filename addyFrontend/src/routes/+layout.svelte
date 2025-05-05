@@ -29,7 +29,9 @@
   <MobileHeader />
 {/if}
 
-<slot />
+<div class="mt-0 sm:mt-20">
+  <slot />
+</div>
 <Toaster />
 
 <!-- Floating WhatsApp Button -->

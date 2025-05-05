@@ -124,7 +124,7 @@
             $token
           );
           healthcareStore.clear();
-          goto("/my-appointments");
+          goto("/profile");
         });
       } catch (err) {
         if (err.message.includes('401') || err.message.includes('403')) {

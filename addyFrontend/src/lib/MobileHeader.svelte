@@ -88,7 +88,7 @@
 
 <!-- Fixed Header -->
 <header
-  class="flex md:hidden justify-between items-center p-5 fixed top-0 w-full bg-white z-50 border-b border-gray-200 shadow-sm"
+  class="flex xl:hidden justify-between items-center p-5 fixed top-0 w-full bg-white z-50 border-b border-gray-200 shadow-sm"
 >
   <div class="logo">
     <a href="/" class="block">

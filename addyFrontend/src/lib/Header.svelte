@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="hidden md:flex items-center justify-between custom-shadow bg-white sticky top-0 z-50">
+<div class="hidden xl:flex items-center justify-between custom-shadow bg-white sticky top-0 z-50">
   <a href="/"
     ><img src={gsToHttp(image)} alt="" class="w-28 object-contain" /></a
   >

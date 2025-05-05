@@ -13,7 +13,9 @@
   />
 </svelte:head>
 
-<div class="md:p-10 p-5 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-4">
+<div
+  class="p-5 sm:p-6 md:p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-6"
+>
   {#each healthcareData as individualData (individualData.id)}
     <IndividualHealthcareCard individualCardData={individualData} />
   {/each}
