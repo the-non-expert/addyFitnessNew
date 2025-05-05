@@ -29,7 +29,7 @@
   <MobileHeader />
 {/if}
 
-<div class="mt-0 sm:mt-20">
+<div class="mt-0 sm:mt-20 xl:mt-0">
   <slot />
 </div>
 <Toaster />
